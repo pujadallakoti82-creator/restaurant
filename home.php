@@ -22,7 +22,7 @@
            <li> <a href="<?php echo SITEURL; ?>index.php">Home</a> </li>
            <li><a href="<?php echo SITEURL; ?>categories.php">Categories</a> </li>
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
-           <li><a href="#">Contact</a></li>
+           <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
         </ul>
     </nav>
 
@@ -49,7 +49,7 @@
 
    <?php 
 //create sql query to display categories from database
-$sql = "SELECT * FROM category WHERE active='Yes' AND featured='Yes' LIMIT 3";
+$sql = "SELECT * FROM category WHERE active='Yes' AND featured='Yes'";
 //execute the query
 $res = mysqli_query($conn, $sql);
 //count rows to check whether the category is available or not
@@ -79,7 +79,7 @@ if($count > 0)
                 else
                 {
                     ?>
-                    <img src="<?php echo SITEURL; ?>image/category/<?php echo $image_name; ?>" 
+                    <img  src="<?php echo SITEURL; ?>image/category/<?php echo $image_name; ?>" 
                          alt="<?php echo $title; ?>" 
                          class="img-responsive">
                     <?php
@@ -100,12 +100,9 @@ else
 }
 ?>
 
-    
-
-
-            
+     
 
     </div>
 </section>
 
-<?php include('partials-front/footer.php'); ?>
+  <?php include('partials-front/footer.php') ?>

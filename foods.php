@@ -1,6 +1,10 @@
       <?php include('partials-front/menu.php'); ?>
 
 
+
+
+
+
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search text-center">
         <div class="container">
@@ -74,6 +78,9 @@
                     <br>
 
                     <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                  <a href="add-to-cart.php?food_id=<?php echo $id; ?>&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
+                      class="btn btn-primary">Add to Cart</a>
+
                 </div>
             </div>
 

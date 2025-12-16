@@ -12,7 +12,7 @@
         }
         ?>
 
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return validatePasswordForm()">
 
           <table class="tbl-30">
             <tr>

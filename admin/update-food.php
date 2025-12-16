@@ -33,7 +33,7 @@
         <h1>Update Food</h1>
         <br><br>
 
-          <form action="" method="POST" enctype="multipart/form-data">
+          <form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateUpdateFood()">
 
              <table class="tbl-30">
 

@@ -15,7 +15,7 @@
 
         ?>
 
-        <form action="" method="POST" >
+        <form action="" method="POST" onsubmit="return validateAdminForm()">
 
         <table class="tbl-30">
             <tr>
@@ -42,7 +42,7 @@
 
         </table>
 
-        </form>
+        </form>    
     </div>
 </div>
 

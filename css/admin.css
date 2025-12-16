@@ -44,7 +44,8 @@ table tr th{
 }
 
 table tr td{
-    padding: 1%;
+    padding-left: 2%;
+    padding-top: 2%;
 }
 
 .btn-primary{
@@ -136,4 +137,21 @@ table tr td{
     width: 20%;
     margin: 10% auto;
     padding: 2%;
+}
+
+
+
+.tbl-full {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tbl-full th, .tbl-full td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.tbl-full th {
+    background-color: #f2f2f2;
+    text-align: left;
 }

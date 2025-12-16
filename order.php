@@ -45,7 +45,7 @@
 
               <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
 
-              <form action="" method="POST" class="order" onsubmit="return validateOrderForm();">
+              <form action="" method="POST" class="order" onsubmit="return validateOrderForm()">
                   <fieldset>
                       <legend>Selected Food</legend>
 
@@ -77,7 +77,7 @@
                           <input type="hidden" id="price" name="price" value="<?php echo $price; ?>">
 
                           <div class="order-label">Quantity</div>
-                          <input type="number" id="quantity" name="quantity" class="input-responsive" value="1" required>
+                          <input type="number" id="quantity" name="quantity" class="input-responsive" value="1"  min="1" required>
                           <p>Total: $<span id="total-price"></span></p>
                       </div>
 

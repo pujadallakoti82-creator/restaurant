@@ -46,7 +46,7 @@
 
         ?>
          
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateCategoryUpdate()">
         <table class="tbl-30">
             <tr>
                 <td>Title: </td>

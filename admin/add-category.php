@@ -26,7 +26,7 @@
         <br><br>
 
 <!-----add category form starts------>
-<form action="" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateCategoryForm()">
     <table class="tbl-30">
         <tr>
             <td>Title: </td>

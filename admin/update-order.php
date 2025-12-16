@@ -6,6 +6,7 @@
         <br><br>
 
         <?php
+   
         //1. check whether id is set or not
         if(isset($_GET['id']))
         {
@@ -52,7 +53,7 @@
         ?>
 
 
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return validateOrderForm()">
 
             <table class="tbl-30">
                 <tr>
@@ -70,7 +71,7 @@
                 <tr>
                     <td>Quantity: </td>
                     <td>
-                        <input type="number"name="quantity" value="<?php echo $quantity; ?>">
+                        <input type="number"name="quantity" value="<?php echo $quantity; ?>"readonly>
                     </td>
                 </tr>
 
@@ -89,28 +90,28 @@
                 <tr>
                     <td>Customer Name: </td>
                     <td>
-                        <input type="text"name="customer_name" value="<?php echo $customer_name; ?>">
+                        <input type="text"name="customer_name" value="<?php echo $customer_name; ?>"readonly>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Customer Contact: </td>
                     <td>
-                        <input type="text"name="customer_contact" value="<?php echo $customer_contact; ?>">
+                        <input type="text"name="customer_contact" value="<?php echo $customer_contact; ?>"readonly>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Customer Email: </td>
                     <td>
-                        <input type="text"name="customer_email" value="<?php echo $customer_email; ?>">
+                        <input type="text"name="customer_email" value="<?php echo $customer_email; ?>"readonly>
                     </td>
                 </tr>
 
                 <tr>
                     <td>Customer Address: </td>
                     <td>
-                        <textarea name="customer_address" cols="30" rows="5"><?php echo $customer_address; ?></textarea>
+                        <textarea readonly name="customer_address" cols="30" rows="5"><?php echo $customer_address; ?></textarea>
                     </td>
                 </tr>
 
@@ -131,54 +132,54 @@
 //check whether the submit button is clicked or not
 if(isset($_POST['submit']))
 {
-    //echo "button clicked";
-
     //get all the values from the form to update
     $id = $_POST['id'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
+    $total = $price * $quantity;
+    $status = $_POST['status'];
+    $customer_name = $_POST['customer_name'];
+    $customer_contact = $_POST['customer_contact'];
+    $customer_email = $_POST['customer_email'];
+    $customer_address = $_POST['customer_address'];
 
- $total = $price * $quantity;
-
-   $status = $_POST['status'];
-   
-$customer_name = $_POST['customer_name'];
-$customer_contact = $_POST['customer_contact'];
-$customer_email = $_POST['customer_email'];
-$customer_address = $_POST['customer_address'];
-   
-
-    //create a sql query to update admin
+    //create a sql query to update order
     $sql2 = "UPDATE tbl_order SET
-    quantity = $quantity,
-    total = $total,
-  status = '$status', 
-  customer_name = '$customer_name',
-  customer_contact = '$customer_contact',
-  customer_email = '$customer_email',
- customer_address = '$customer_address'
- WHERE id=$id
+        quantity = $quantity,
+        total = $total,
+        status = '$status', 
+        customer_name = '$customer_name',
+        customer_contact = '$customer_contact',
+        customer_email = '$customer_email',
+        customer_address = '$customer_address'
+        WHERE id=$id
     ";  
 
     //execute the query
     $res2 = mysqli_query($conn, $sql2);
 
-    //check whether the query executed successfully or not
-    //and redirect to manage order with message
-    if($res2==true)
+    if($res2 == true)
     {
-        //qurey executed and oredr updated
-        $_SESSION['update'] = "<div class='success'>Order Updated Successfully.</div>";
-        //redirect to manage order page
-        header('location:'.SITEURL.'admin/manage-order.php');
+        //order updated successfully
+        if($status == "Delivered"){
+            //show message if status is Delivered
+            echo "<script>
+                alert('Order has been Delivered successfully!');
+                window.location = '".SITEURL."admin/manage-order.php';
+            </script>";
+        } else {
+            $_SESSION['update'] = "<div class='success'>Order Updated Successfully.</div>";
+            header('location:'.SITEURL.'admin/manage-order.php');
+        }
     }
-    else {
-        //qurey to update admin
+    else 
+    {
+        //failed to update order
         $_SESSION['update'] = "<div class='error'>Failed to Update Order.</div>";
-        //redirect to manage order page
         header('location:'.SITEURL.'admin/manage-order.php');
     }
 }
+
 ?>
 </div>
 </div>

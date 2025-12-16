@@ -14,7 +14,7 @@
              }
         ?>
 
-          <form action="" method="POST" enctype="multipart/form-data">
+          <form action="" method="POST" enctype="multipart/form-data" onsubmit="return validateFoodForm()">
 
           <table class="tbl-30">
 

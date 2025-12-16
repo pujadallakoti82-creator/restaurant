@@ -40,7 +40,7 @@
         ?>
 
 
-        <form action="" method="POST">
+        <form action="" method="POST" onsubmit="return validateUpdateAdmin()">
 
             <table class="tbl-30">
                 <tr>
