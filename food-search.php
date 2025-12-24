@@ -1,5 +1,14 @@
       <?php include('partials-front/menu.php'); ?>
 
+      <?php
+// Check login
+// if(!isset($_SESSION['user_id'])){
+  //  header('location:login.php');
+    // exit();
+ //}
+
+?>
+
            
     <!-- Navbar Section Ends Here -->
 
@@ -13,7 +22,7 @@
                $search = mysqli_real_escape_string($conn, $_POST['search']);
             ?>
 
-            <h2>Foods on Your Search<a href="#" class="text-white">"<?php echo $search; ?>"</a>
+            <h2>Foods on Your Search<a href="#" class="text-black">"<?php echo $search; ?>"</a>
 </h2>
 
         </div>
@@ -86,7 +95,7 @@
                   </p>
                     <br>
 
-                    <a href="#" class="btn btn-primary">Order Now</a>
+                    <a href="order_page.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                 </div>
             </div>                     
                 <?php

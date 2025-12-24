@@ -1,4 +1,12 @@
       <?php include('partials-front/menu.php');  ?>
+      <?php
+// Check login
+if(!isset($_SESSION['user_id'])){
+    header('location:login.php');
+    exit();
+}
+
+?>
 
           <?php
           
@@ -33,7 +41,7 @@
     <section class="food-search text-center">
         <div class="container">
             
-            <h2>Foods on <a href="#" class="text-white">"<?php echo $category_title; ?>"</a></h2>
+            <h2>Foods on <a href="#" class="text-black">"<?php echo $category_title; ?>"</a></h2>
 
         </div>
     </section>
@@ -99,7 +107,7 @@
                    </p>
                     <br>
 
-                    <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                    <a href="<?php echo SITEURL; ?>order_page.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                     <a href="add-to-cart.php?food_id=<?php echo $id; ?>&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
                      class="btn btn-primary">Add to Cart</a>
 

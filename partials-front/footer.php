@@ -1,6 +1,6 @@
   <!-- footer Section Starts Here -->
    <!-- social Section Starts Here -->
-    <section class="social">
+   <!--- <section class="social">
         <div class="container text-center">
             <ul>
                 <li>
@@ -14,8 +14,8 @@
                 </li>
             </ul>
         </div>
-    </section>
-    <!-- social Section Ends Here -->
+    </section> --->
+   <!--- social Section Ends Here -->
 
    
     <section class="footer">
@@ -24,7 +24,8 @@
         </div>
     </section>
     <!-- footer Section Ends Here -->
-     <script src="main.js"></script>
+          <script src="main.js"></script>
+
 
 </body>
 </html>

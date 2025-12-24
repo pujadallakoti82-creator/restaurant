@@ -13,23 +13,39 @@ function index_redirect(){
 
 
 // ---------------------calculation of menu price--------------------
-const priceInput = document.getElementById('price');
-const quantityInput = document.getElementById('quantity');
-const totalPriceSpan = document.getElementById('total-price');
+// --------------------- REAL-TIME PRICE CALCULATION ---------------------
 
-// Function to calculate total
-function calculateTotal() {
-    const price = parseFloat(priceInput.value);
-    const quantity = parseInt(quantityInput.value);
-    const total = price * quantity;
-    totalPriceSpan.textContent = total.toFixed(2); // display 2 decimals
-}
+document.addEventListener("DOMContentLoaded", function () {
 
-// Call function when quantity changes
-quantityInput.addEventListener('input', calculateTotal);
+    // Get quantity input
+    const quantityInput = document.querySelector(".quantity");
 
-// Initialize total on page load
-calculateTotal();
+    // Get price and total elements
+    const priceInput = document.querySelector(".price");
+    const totalSpan = document.querySelector(".total-price");
+
+    // Initial total when page loads
+    let price = parseFloat(priceInput.value);
+    let qty = parseInt(quantityInput.value);
+    totalSpan.innerText = (price * qty).toFixed(2);
+
+    // Update total when quantity changes
+    quantityInput.addEventListener("input", function () {
+
+        let qty = parseInt(this.value);
+
+        // Prevent zero or negative values
+        if (qty < 1 || isNaN(qty)) {
+            qty = 1;
+            this.value = 1;
+        }
+
+        let total = price * qty;
+        totalSpan.innerText = total.toFixed(2);
+    });
+});
+
+
 // -----------------------------register validation--------------------
 function validateForm() {
     let name = document.getElementById("name").value.trim();
@@ -608,3 +624,5 @@ function validatePasswordForm()
 
     return true; // allow form submission
 }
+
+

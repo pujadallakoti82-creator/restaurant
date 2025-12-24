@@ -93,7 +93,7 @@ if($count > 0)
                 }
                 ?>
 
-                <h4><?php echo $title; ?></h4>
+                <h4><a><?php echo $title; ?></a></h4>
             </div>
         </div>
         </a>

@@ -1,5 +1,14 @@
       <?php include('partials-front/menu.php'); ?>
 
+      <?php
+// Check login
+if(!isset($_SESSION['user_id'])){
+    header('location:login.php');
+    exit();
+}
+
+?>
+
   
     <!-- CAtegories Section Starts Here -->
     <section class="categories">

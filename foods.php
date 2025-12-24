@@ -1,8 +1,13 @@
       <?php include('partials-front/menu.php'); ?>
 
+<?php
+// Check login
+if(!isset($_SESSION['user_id'])){
+    header('location:login.php');
+    exit();
+}
 
-
-
+?>
 
 
     <!-- fOOD sEARCH Section Starts Here -->
@@ -77,7 +82,7 @@
                     </p>
                     <br>
 
-                    <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                    <a href="<?php echo SITEURL; ?>order_page.php?food_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                   <a href="add-to-cart.php?food_id=<?php echo $id; ?>&redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
                       class="btn btn-primary">Add to Cart</a>
 

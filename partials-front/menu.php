@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="css/style.css">
+     <script src="main.js"></script>
+
 </head>
 
 <body>
@@ -24,6 +26,7 @@
            <li><a href="<?php echo SITEURL; ?>categories.php">Categories</a> </li>
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
+           <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
         </ul>
     </nav>
     </header>

@@ -208,10 +208,14 @@ body {
 
 /* CARD TEXT */
 .card h4 {
+    text-decoration: none;
     font-size: 18px;
     margin-bottom: 10px;
-    text-decoration: none;
+    color: #000;
+    
 }
+
+
 
 .card p {
     font-size: 14px;

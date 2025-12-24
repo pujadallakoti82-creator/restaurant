@@ -1,5 +1,14 @@
 <?php include('./config/constants.php') ?>
 
+<?php
+// Check login
+if(!isset($_SESSION['user_id'])){
+    header('location:login.php');
+    exit();
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +32,7 @@
            <li><a href="<?php echo SITEURL; ?>categories.php">Categories</a> </li>
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
+           <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
         </ul>
     </nav>
 
@@ -86,7 +96,7 @@ if($count > 0)
                 }
                 ?>
 
-                <h4><?php echo $title; ?></h4>
+                <h4><a><?php echo $title; ?></a></h4>
             </div>
         </div>
         </a>

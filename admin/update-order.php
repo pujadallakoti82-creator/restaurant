@@ -132,7 +132,7 @@
 //check whether the submit button is clicked or not
 if(isset($_POST['submit']))
 {
-    //get all the values from the form to update
+    // get values from form
     $id = $_POST['id'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
@@ -143,44 +143,48 @@ if(isset($_POST['submit']))
     $customer_email = $_POST['customer_email'];
     $customer_address = $_POST['customer_address'];
 
-    //create a sql query to update order
+    // SQL query to update order
     $sql2 = "UPDATE tbl_order SET
         quantity = $quantity,
         total = $total,
-        status = '$status', 
+        status = '$status',
         customer_name = '$customer_name',
         customer_contact = '$customer_contact',
         customer_email = '$customer_email',
         customer_address = '$customer_address'
         WHERE id=$id
-    ";  
+    ";
 
-    //execute the query
+    // execute query
     $res2 = mysqli_query($conn, $sql2);
 
+    // check update result
     if($res2 == true)
     {
-        //order updated successfully
-        if($status == "Delivered"){
-            //show message if status is Delivered
+        // if order delivered → go to bill page
+        if($status == "Delivered")
+        {
             echo "<script>
                 alert('Order has been Delivered successfully!');
-                window.location = '".SITEURL."admin/manage-order.php';
+                window.location = '".SITEURL."admin/bill.php?order_id=".$id."';
             </script>";
-        } else {
+        }
+        else
+        {
+            // other status update
             $_SESSION['update'] = "<div class='success'>Order Updated Successfully.</div>";
             header('location:'.SITEURL.'admin/manage-order.php');
         }
     }
-    else 
+    else
     {
-        //failed to update order
+        // update failed
         $_SESSION['update'] = "<div class='error'>Failed to Update Order.</div>";
         header('location:'.SITEURL.'admin/manage-order.php');
     }
 }
-
 ?>
+
 </div>
 </div>
 

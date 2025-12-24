@@ -1,6 +1,17 @@
 <?php
 include('partials-front/menu.php');
 
+
+// Check login
+if(!isset($_SESSION['user_id'])){
+    header('location:login.php');
+    exit();
+}
+
+
+
+
+
 if(isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($conn, $_POST['name']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
@@ -78,6 +89,7 @@ if(isset($_POST['submit'])) {
                 <p><strong>Email:</strong> info@foodieus.com</p>
                 <p><strong>Address:</strong> Chitwan, Nepal</p>
             </div>
+    </div>
 
 
 <?php include('partials-front/footer.php'); ?> 
