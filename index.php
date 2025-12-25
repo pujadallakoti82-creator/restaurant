@@ -105,12 +105,7 @@ else
 {
     echo "<div class='error'>Category not Added.</div>";
 }
-?>
-
-    
-
-
-            
+?>        
 
     </div>
 </section>

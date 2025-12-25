@@ -27,6 +27,7 @@
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
            <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
+           <li><a href="#">&nbsp;</a></li>
         </ul>
     </nav>
     </header>
@@ -52,7 +53,7 @@ if($user_id > 0) {
 }
 ?>
 
-<?php if($current_page == 'foods.php' || $current_page == 'category-foods.php'): ?>
+ <?php if($current_page == 'foods.php' || $current_page == 'category-foods.php' || $current_page == 'categories.php'): ?> 
     <div class="cart-container">
         <a href="<?php echo SITEURL; ?>cart.php" class="cart-icon">
             <i class="fa fa-shopping-cart"></i>
