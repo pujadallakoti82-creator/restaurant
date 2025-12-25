@@ -66,7 +66,7 @@ if(isset($_POST['submit'])) {
         <div class="contact-content">
             <!-- Contact Form -->
             <div class="contact-form">
-                <form action="" method="POST">
+                <form action="" method="POST" onsubmit="return validateContactForm();">
                     <input type="text" name="name" placeholder="Your Name" required>
                     <input type="email" name="email" placeholder="Your Email" required>
                     <input type="text" name="phone" placeholder="Phone Number (Optional)">
@@ -90,6 +90,49 @@ if(isset($_POST['submit'])) {
                 <p><strong>Address:</strong> Chitwan, Nepal</p>
             </div>
     </div>
+
+
+
+<script>
+function validateContactForm() {
+
+    let name = document.querySelector("input[name='name']").value.trim();
+    let email = document.querySelector("input[name='email']").value.trim();
+    let phone = document.querySelector("input[name='phone']").value.trim();
+    let message = document.querySelector("textarea[name='message']").value.trim();
+
+    // Name validation
+    if (name.length < 3) {
+        alert("Name must be at least 3 characters long");
+        return false;
+    }
+
+    // Email validation
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address");
+        return false;
+    }
+
+    // Phone validation (optional)
+    if (phone !== "") {
+        let phonePattern = /^(97|98|96)\d{8}$/;
+        if (!phonePattern.test(phone)) {
+            alert("Enter a valid phone number");
+            return false;
+        }
+    }
+
+    // Message validation
+    if (message.length < 10) {
+        alert("Message must be at least 10 characters long");
+        return false;
+    }
+
+    return true; // allow form submit
+}
+</script>
+
 
 
 <?php include('partials-front/footer.php'); ?> 

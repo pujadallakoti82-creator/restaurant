@@ -101,80 +101,81 @@ function validateForm() {
 
     return true; // allow form submit
 }
+
 // ----------------order validation-----------------
-function validateOrderForm() {
-    // Get form values
-    let quantity = document.getElementById("quantity").value;
-    let price = document.getElementById("price").value;
-    let name = document.querySelector("input[name='full-name']").value.trim();
-    let contact = document.querySelector("input[name='contact']").value.trim();
-    let email = document.querySelector("input[name='email']").value.trim();
-    let address = document.querySelector("textarea[name='address']").value.trim();
+// function validateOrderForm() {
+//     // Get form values
+//     let quantity = document.getElementById("quantity").value;
+//     let price = document.getElementById("price").value;
+//     let name = document.querySelector("input[name='full-name']").value.trim();
+//     let contact = document.querySelector("input[name='contact']").value.trim();
+//     let email = document.querySelector("input[name='email']").value.trim();
+//     let address = document.querySelector("textarea[name='address']").value.trim();
 
-    // Quantity validation
-    if (quantity === "" || quantity <= 0) {
-        alert("Please enter a valid quantity (minimum 1).");
-        return false;
-    }
+//     // Quantity validation
+//     if (quantity === "" || quantity <= 0) {
+//         alert("Please enter a valid quantity (minimum 1).");
+//         return false;
+//     }
 
-    // Price validation
-    if (price === "" || price <= 0) {
-        alert("Invalid price for the selected food.");
-        return false;
-    }
+//     // Price validation
+//     if (price === "" || price <= 0) {
+//         alert("Invalid price for the selected food.");
+//         return false;
+//     }
 
-    // Total price validation
-    let total = price * quantity;
-    if (total <= 0) {
-        alert("Total price is invalid.");
-        return false;
-    }
+//     // Total price validation
+//     let total = price * quantity;
+//     if (total <= 0) {
+//         alert("Total price is invalid.");
+//         return false;
+//     }
 
-    // Full name validation (letters only, at least 3 characters)
-    let namePattern = /^[A-Za-z ]{3,}$/;
-    if (name === "") {
-        alert("Full name is required.");
-        return false;
-    }
-    if (!namePattern.test(name)) {
-        alert("Full name should contain only letters and be at least 3 characters long.");
-        return false;
-    }
+//     // Full name validation (letters only, at least 3 characters)
+//     let namePattern = /^[A-Za-z ]{3,}$/;
+//     if (name === "") {
+//         alert("Full name is required.");
+//         return false;
+//     }
+//     if (!namePattern.test(name)) {
+//         alert("Full name should contain only letters and be at least 3 characters long.");
+//         return false;
+//     }
 
-    // Phone number validation (Nepal format)
-    let phonePattern = /^(97|98|96)\d{8}$/;
-    if (contact === "") {
-        alert("Phone number is required.");
-        return false;
-    }
-    if (!phonePattern.test(contact)) {
-        alert("Enter a valid Nepal phone number (e.g., 98XXXXXXXX).");
-        return false;
-    }
+//     // Phone number validation (Nepal format)
+//     let phonePattern = /^(97|98|96)\d{8}$/;
+//     if (contact === "") {
+//         alert("Phone number is required.");
+//         return false;
+//     }
+//     if (!phonePattern.test(contact)) {
+//         alert("Enter a valid Nepal phone number (e.g., 98XXXXXXXX).");
+//         return false;
+//     }
 
-    // Email validation
-    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        alert("Email is required.");
-        return false;
-    }
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
-    }
+//     // Email validation
+//     let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     if (email === "") {
+//         alert("Email is required.");
+//         return false;
+//     }
+//     if (!emailPattern.test(email)) {
+//         alert("Please enter a valid email address.");
+//         return false;
+//     }
 
-    // Address validation
-    if (address === "") {
-        alert("Delivery address is required.");
-        return false;
-    }
-    if (address.length < 10) {
-        alert("Address must be at least 10 characters long.");
-        return false;
-    }
+//     // Address validation
+//     if (address === "") {
+//         alert("Delivery address is required.");
+//         return false;
+//     }
+//     if (address.length < 10) {
+//         alert("Address must be at least 10 characters long.");
+//         return false;
+//     }
 
-    return true; // allow form submit
-}
+//     return true; // allow form submit
+// }
 
 
 //------------------Add Admin Validation---------------
@@ -624,5 +625,3 @@ function validatePasswordForm()
 
     return true; // allow form submission
 }
-
-

@@ -91,17 +91,18 @@ if (isset($_GET['food_id'])) {
 <fieldset>
 <legend>Delivery Details</legend>
 
-<div class="order-label">Full Name</div>
-<input type="text" name="full-name" placeholder="E.g.Pooja Dallakoti" class="input-responsive" required>
+                <div class="order-label">Full Name</div>
+                <input type="text" name="full-name" placeholder="E.g. Pooja Dallakoti" class="input-responsive" required minlength="3" pattern="[A-Za-z ]+" title="Only letters and spaces allowed">
 
-<div class="order-label">Phone Number</div>
-<input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
+                <div class="order-label">Phone Number</div>
+                <input type="tel" name="contact" placeholder="E.g. 98/97{xxxxxxxx}" class="input-responsive" required  pattern="98[0-9]{8}|97[0-9]{8}" title="Enter a valid 10-digit mobile number">
 
-<div class="order-label">Email</div>
-<input type="email" name="email"  placeholder="E.g. hi@pujadk.com" class="input-responsive" required>
+                <div class="order-label">Email</div>
+                <input type="email" name="email" placeholder="E.g. hi@pujadk.com" class="input-responsive" required>
 
-<div class="order-label">Address</div>
-<textarea name="address" rows="5"  placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
+                <div class="order-label">Address</div>
+                <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required  minlength="5"  title="Minimum 5 characters required"></textarea>
+
 
 <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
 

@@ -15,7 +15,7 @@ if(!isset($_SESSION['user_id'])){
     <h2>Your Cart</h2>
 
 <?php
-// 1️⃣ Check login
+// 1️ Check login
 if(!isset($_SESSION['user_id'])){
     echo "<p>Please login to see your cart.</p>";
     include('partials-front/footer.php');
@@ -24,7 +24,7 @@ if(!isset($_SESSION['user_id'])){
 
 $user_id = $_SESSION['user_id'];
 
-// 2️⃣ Remove item
+// 2️. Remove item
 if(isset($_GET['remove'])){
     $remove_id = $_GET['remove'];
     mysqli_query($conn, "DELETE FROM cart WHERE id=$remove_id AND user_id=$user_id");
@@ -32,7 +32,7 @@ if(isset($_GET['remove'])){
     exit();
 }
 
-// 3️⃣ Update quantity
+// 3️. Update quantity
 if(isset($_GET['update']) && isset($_GET['qty'])){
     $cart_id = $_GET['update'];
     $qty = $_GET['qty'];
@@ -50,7 +50,7 @@ if(isset($_GET['update']) && isset($_GET['qty'])){
     exit();
 }
 
-// 4️⃣ Fetch cart items
+// 4️. Fetch cart items
 $res = mysqli_query($conn, "SELECT * FROM cart WHERE user_id=$user_id");
 
 if(mysqli_num_rows($res) > 0){
@@ -95,7 +95,7 @@ if(mysqli_num_rows($res) > 0){
 
     echo "</table>";
 
-    // 5️⃣ ORDER NOW BUTTON (PASS FROM CART FLAG)
+    //5. ORDER NOW BUTTON (PASS FROM CART FLAG)
     echo '<br>
     <a href="order.php?from=cart" class="btn btn-primary">
         Order Now

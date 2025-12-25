@@ -24,7 +24,7 @@
         </div>
     </section>
     <!-- footer Section Ends Here -->
-          <script src="main.js"></script>
+         <script src="main.js"></script>
 
 
 </body>
