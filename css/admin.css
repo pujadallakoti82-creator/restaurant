@@ -91,6 +91,9 @@ table tr td{
 /* css for menu*/
 .menu{
     border-bottom: 1px solid grey;
+    height: 10%;
+    display: flex;
+    align-items: center;
 }
 .menu ul{
     list-style-type:none ;
@@ -114,21 +117,34 @@ table tr td{
 .main-content{
     background-color: #f1f2f6;
     padding: 3% 0;
+    min-height: 72.5%;
+    height: fit-content;
 }
 
-.col-4{
+.col-4 {
     width: 18%;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.797);
     margin: 1%;
     padding: 2%;
     float: left;
+    border-radius: 10px; /* rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* subtle shadow */
+    transition: all 0.3s ease; /* smooth animation */
+    cursor: pointer;
 
 }
-  
+
+.col-4:hover {
+    transform: translateY(-5px) scale(1.03); /* lifts slightly */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* deeper shadow */
+    background-color: #ffeae0; /* soft hover color */
+}
+
 /* css for footer */
 .footer{
     background-color: #ff4757;
     color: white;
+    
 }
 
 /*css for login */
@@ -164,4 +180,63 @@ table tr td{
     body {
         background: white;
     }
+}
+input[type="text"],
+input[type="password"],input[type="number"]{
+    background-color: #FFFFFF;
+    color: #1E293B;
+    border: 1px solid rgb(32, 138, 199);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+    width: 250px;
+    margin-top: 5px;
+}
+input[type="date"] {
+    width: 110px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+input[type="text"]:active {
+    transform: scale(0.95);
+}
+
+input[type="password"]:active {
+    transform: scale(0.95);
+}
+
+input[type="text"]:focus {
+   border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0,123,255,0.4);
+    background: #fff;
+}
+select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f8f8f8;
+    outline: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 15px;
+}
+
+select:hover {
+    border-color: #007bff;
+}
+
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0,123,255,0.4);
+    background: #fff;
 }

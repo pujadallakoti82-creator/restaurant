@@ -1,6 +1,6 @@
 <?php include('partials/menu.php'); ?>
 
-<di class="main-content">
+<div class="main-content">
     <div class="wrapper">
         <h1>Add Category</h1>
 

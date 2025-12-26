@@ -55,6 +55,15 @@ if (isset($_GET['food_id'])) {
     header('location:' . SITEURL);
     exit();
 }
+
+$user_id = $_SESSION['user_id'];
+
+// Get the logged-in user's email (because tbl_order stores customer_email)
+$sql_user = "SELECT email, name FROM users WHERE id='$user_id'";
+$res_user = mysqli_query($conn, $sql_user);
+$user_data = mysqli_fetch_assoc($res_user);
+$user_email = $user_data['email'];
+$user_name = $user_data['name'];
 ?>
 
 <!-- FOOD ORDER FORM -->
@@ -94,16 +103,17 @@ if (isset($_GET['food_id'])) {
             <fieldset>
                 <legend>Delivery Details</legend>
                 <div class="order-label">Full Name</div>
-                <input type="text" name="full-name" placeholder="E.g. Pooja Dallakoti" class="input-responsive" required minlength="3" pattern="[A-Za-z ]+" title="Only letters and spaces allowed">
+                <input type="text" name="full-name" placeholder="E.g. Pooja Dallakoti" class="input-responsive" required minlength="3" pattern="[A-Za-z ]+" title="Only letters and spaces allowed" value=<?php echo $user_name?> readonly>
 
                 <div class="order-label">Phone Number</div>
                 <input type="tel" name="contact" placeholder="E.g. 98/97{xxxxxxxx}" class="input-responsive" required  pattern="98[0-9]{8}|97[0-9]{8}" title="Enter a valid 10-digit mobile number">
 
                 <div class="order-label">Email</div>
-                <input type="email" name="email" placeholder="E.g. hi@pujadk.com" class="input-responsive" required>
+                <input type="email" name="email" placeholder="E.g. hi@pujadk.com" class="input-responsive" readonly value=<?php echo $user_email?>>
 
                 <div class="order-label">Address</div>
-                <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required  minlength="5"  title="Minimum 5 characters required"></textarea>
+                <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required minlength="5" title="Minimum 5 characters required"></textarea>
+
 
                 <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
             </fieldset>

@@ -26,6 +26,7 @@
            <li><a href="<?php echo SITEURL; ?>categories.php">Categories</a> </li>
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
+           <li><a href="<?php echo SITEURL; ?>view-order-history.php">Order History</a></li>
            <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
            <li><a href="#">&nbsp;</a></li>
         </ul>

@@ -519,3 +519,30 @@ fieldset{
 .food-menu-box{
     min-height: 150px;
 }
+.tbl-order{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.tbl-order th, .tbl-order td{
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.tbl-order th{
+    background-color: #ff511c;
+    color: white;
+}
+
+.tbl-order tr:nth-child(even){
+    background-color: #ffeae0;
+}
+
+.error{
+    text-align: center;
+    color: #ff4757;
+    padding: 20px;
+}
+
