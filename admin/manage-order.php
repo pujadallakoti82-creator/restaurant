@@ -19,7 +19,7 @@
                     <tr>
                         <th>S.N.</th>
                         <th>Food</th>
-                        <th>Price</th>
+                        <th>Price (Rs)</th>
                         <th>Qty</th>
                         <th>Total</th>
                         <th>Order Date</th>

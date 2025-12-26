@@ -51,7 +51,7 @@
                     <tr>
                         <th>S.N.</th>
                         <th>Title</th>
-                        <th>Price</th>
+                        <th>Price (Rs)</th>
                         <th>Image</th>
                         <th>Featured</th>
                         <th>Active</th>

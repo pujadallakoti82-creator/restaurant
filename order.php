@@ -69,7 +69,7 @@ $user_name = $user_data['name'];
 <!-- FOOD ORDER FORM -->
 <section class="food-search">
     <div class="container">
-        <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
+        <h2 class="text-center text-black">Fill this form to confirm your order.</h2>
 
         <form action="" method="POST" class="order" onsubmit="return validateOrderForm()">
             <fieldset>
@@ -86,10 +86,10 @@ $user_name = $user_data['name'];
                         <?php endif; ?>
 
                         <h3><?php echo $item['title']; ?></h3>
-                        <p>Price: $<?php echo $item['price']; ?></p>
+                        <p>Price: Rs <?php echo $item['price']; ?></p>
                         <p>Qty: <?php echo $item['qty']; ?></p>
                         <?php $total = $item['price'] * $item['qty']; $grandTotal += $total; ?>
-                        <p><b>Total: $<?php echo $total; ?></b></p>
+                        <p><b>Total: Rs <?php echo $total; ?></b></p>
 
                         <input type="hidden" name="food_id[]" value="<?php echo $item['id']; ?>">
                         <input type="hidden" name="qty[]" value="<?php echo $item['qty']; ?>">
@@ -97,7 +97,7 @@ $user_name = $user_data['name'];
                     <hr>
                 <?php endforeach; ?>
 
-                <h3>Grand Total: $<?php echo $grandTotal; ?></h3>
+                <h3>Grand Total: Rs <?php echo $grandTotal; ?></h3>
             </fieldset>
 
             <fieldset>
