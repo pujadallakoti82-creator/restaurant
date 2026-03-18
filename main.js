@@ -48,580 +48,511 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // -----------------------------register validation--------------------
 function validateForm() {
+
     let name = document.getElementById("name").value.trim();
     let email = document.getElementById("email").value.trim();
     let password = document.getElementById("password").value;
 
+    let isValid = true;
+
+    // Clear previous errors
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("passwordError").innerHTML = "";
+
     // ---------- NAME VALIDATION ----------
     if (name === "") {
-        alert("Full Name is required");
-        return false;
+        document.getElementById("nameError").innerHTML = "Full Name is required";
+        isValid = false;
     }
-
-    if (name.length < 3) {
-        alert("Name must be at least 3 characters");
-        return false;
+    else if (name.length < 3) {
+        document.getElementById("nameError").innerHTML = "Name must be at least 3 characters";
+        isValid = false;
     }
+    else {
+        let namePattern = /^[A-Za-z ]+$/;
+        if (!namePattern.test(name)) {
+            document.getElementById("nameError").innerHTML = "Name can contain only letters and spaces";
+            isValid = false;
+        }
 
-    // Allow only letters and spaces
-    let namePattern = /^[A-Za-z ]+$/;
-    if (!namePattern.test(name)) {
-        alert("Name can contain only letters and spaces");
-        return false;
-    }
-
-    // Prevent multiple spaces
-    if (name.includes("  ")) {
-        alert("Name should not contain multiple spaces");
-        return false;
+        if (name.includes("  ")) {
+            document.getElementById("nameError").innerHTML = "Name should not contain multiple spaces";
+            isValid = false;
+        }
     }
 
     // ---------- EMAIL VALIDATION ----------
     let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        alert("Email is required");
-        return false;
-    }
 
-    if (!emailPattern.test(email)) {
-        alert("Enter a valid email address");
-        return false;
+    if (email === "") {
+        document.getElementById("emailError").innerHTML = "Email is required";
+        isValid = false;
+    }
+    else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").innerHTML = "Enter a valid email address";
+        isValid = false;
     }
 
     // ---------- PASSWORD VALIDATION ----------
     if (password === "") {
-        alert("Password is required");
-        return false;
+        document.getElementById("passwordError").innerHTML = "Password is required";
+        isValid = false;
+    }
+    else if (password.length < 6) {
+        document.getElementById("passwordError").innerHTML = "Password must be at least 6 characters";
+        isValid = false;
     }
 
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters");
-        return false;
-    }
+    return isValid;
+}
+//helper function
+function showError(input, message) {
+    let error = document.createElement("div");
+    error.className = "error-message";
+    error.style.color = "red";
+    error.style.fontSize = "14px";
+    error.innerText = message;
 
-    return true; // allow form submit
+    input.parentNode.appendChild(error);
 }
 
+function clearErrors(){
+    document.querySelectorAll(".error-message").forEach(e => e.remove());
+}
 //----------------order validation-----------------
-function validateOrderForm() {
-    // Get form values
-    let quantity = document.getElementById("quantity").value;
-    let price = document.getElementById("price").value;
-    let name = document.querySelector("input[name='full-name']").value.trim();
-    let contact = document.querySelector("input[name='contact']").value.trim();
-    let email = document.querySelector("input[name='email']").value.trim();
-    let address = document.querySelector("textarea[name='address']").value.trim();
+function validateOrderForm(){
 
-    // Quantity validation
-    if (quantity === "" || quantity <= 0) {
-        alert("Please enter a valid quantity (minimum 1).");
-        return false;
-    }
+    clearErrors();
+    let isValid = true;
 
-    // Price validation
-    if (price === "" || price <= 0) {
-        alert("Invalid price for the selected food.");
-        return false;
+    let quantity = document.querySelector("input[name='quantity']");
+    let price = document.querySelector("input[name='price']");
+    let name = document.querySelector("input[name='full-name']");
+    let contact = document.querySelector("input[name='contact']");
+    let email = document.querySelector("input[name='email']");
+    let address = document.querySelector("textarea[name='address']");
+
+    if(quantity.value === "" || quantity.value <= 0){
+        showError(quantity,"Please enter a valid quantity (minimum 1).");
+        isValid = false;
     }
 
-    // Total price validation
-    let total = price * quantity;
-    if (total <= 0) {
-        alert("Total price is invalid.");
-        return false;
+    if(price.value === "" || price.value <= 0){
+        showError(quantity,"Invalid price.");
+        isValid = false;
     }
 
-    // Full name validation (letters only, at least 3 characters)
-    let namePattern = /^[A-Za-z ]{3,}$/;
-    if (name === "") {
-        alert("Full name is required.");
-        return false;
+    let namePattern=/^[A-Za-z ]{3,}$/;
+
+    if(name.value.trim()===""){
+        showError(name,"Full name is required.");
+        isValid=false;
     }
-    if (!namePattern.test(name)) {
-        alert("Full name should contain only letters and be at least 3 characters long.");
-        return false;
+    else if(!namePattern.test(name.value.trim())){
+        showError(name,"Name must contain only letters (min 3).");
+        isValid=false;
     }
 
-    // Phone number validation (Nepal format)
-    let phonePattern = /^(97|98|96)\d{8}$/;
-    if (contact === "") {
-        alert("Phone number is required.");
-        return false;
+    let phonePattern=/^(97|98|96)\d{8}$/;
+
+    if(contact.value.trim()===""){
+        showError(contact,"Phone number required.");
+        isValid=false;
     }
-    if (!phonePattern.test(contact)) {
-        alert("Enter a valid Nepal phone number (e.g., 98XXXXXXXX).");
-        return false;
+    else if(!phonePattern.test(contact.value.trim())){
+        showError(contact,"Enter valid Nepal phone number.");
+        isValid=false;
     }
 
-    // Email validation
-    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === "") {
-        alert("Email is required.");
-        return false;
+    let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(email.value.trim()===""){
+        showError(email,"Email required.");
+        isValid=false;
     }
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address.");
-        return false;
+    else if(!emailPattern.test(email.value.trim())){
+        showError(email,"Enter valid email.");
+        isValid=false;
     }
 
-    // Address validation
-    if (address === "") {
-        alert("Delivery address is required.");
-        return false;
+    if(address.value.trim()===""){
+        showError(address,"Address required.");
+        isValid=false;
     }
-    if (address.length < 10) {
-        alert("Address must be at least 10 characters long.");
-        return false;
+    else if(address.value.trim().length<10){
+        showError(address,"Address must be at least 10 characters.");
+        isValid=false;
     }
 
-    return true; // allow form submit
+    return isValid;
 }
 
 
 //------------------Add Admin Validation---------------
-function validateAdminForm() {
-    let fullName = document.querySelector("input[name='full_name']").value.trim();
-    let username = document.querySelector("input[name='username']").value.trim();
-    let password = document.querySelector("input[name='password']").value;
+function validateAdminForm(){
 
-    // Full Name validation
-    if (fullName === "") {
-        alert("Full Name is required");
-        return false;
-    }
-    if (fullName.length < 3) {
-        alert("Full Name must be at least 3 characters");
-        return false;
-    }
-    if (!/^[A-Za-z\s]+$/.test(fullName)) {
-        alert("Full Name should contain only letters and spaces");
-        return false;
-    }
+    clearErrors();
+    let isValid=true;
 
-    // Username validation
-    if (username === "") {
-        alert("Username is required");
-        return false;
+    let fullName=document.querySelector("input[name='full_name']");
+    let username=document.querySelector("input[name='username']");
+    let password=document.querySelector("input[name='password']");
+
+    if(fullName.value.trim()===""){
+        showError(fullName,"Full Name required");
+        isValid=false;
     }
-    if (username.length < 4) {
-        alert("Username must be at least 4 characters");
-        return false;
+    else if(fullName.value.trim().length<3){
+        showError(fullName,"Full Name must be at least 3 characters");
+        isValid=false;
     }
-    if (!/^[A-Za-z0-9_]+$/.test(username)) {
-        alert("Username can contain only letters, numbers, and underscore");
-        return false;
+    else if(!/^[A-Za-z\s]+$/.test(fullName.value.trim())){
+        showError(fullName,"Letters and spaces only");
+        isValid=false;
     }
 
-    // Password validation
-    if (password === "") {
-        alert("Password is required");
-        return false;
+    if(username.value.trim()===""){
+        showError(username,"Username required");
+        isValid=false;
     }
-    if (password.length < 6) {
-        alert("Password must be at least 6 characters");
-        return false;
+    else if(username.value.trim().length<4){
+        showError(username,"Username must be at least 4 characters");
+        isValid=false;
+    }
+    else if(!/^[A-Za-z0-9_]+$/.test(username.value.trim())){
+        showError(username,"Letters, numbers, underscore only");
+        isValid=false;
     }
 
-    return true; // allow form submission
+    if(password.value===""){
+        showError(password,"Password required");
+        isValid=false;
+    }
+    else if(password.value.length<6){
+        showError(password,"Password must be at least 6 characters");
+        isValid=false;
+    }
+
+    return isValid;
 }
 
 //---------------add-category validation-------------
-function validateCategoryForm() {
-    let title = document.querySelector("input[name='title']").value.trim();
-    let image = document.querySelector("input[name='image']").value;
-    let featured = document.querySelector("input[name='featured']:checked");
-    let active = document.querySelector("input[name='active']:checked");
+function validateCategoryForm(){
 
-    // Title validation
-    if (title === "") {
-        alert("Category title is required");
-        return false;
-    }
-    if (title.length < 3) {
-        alert("Category title must be at least 3 characters");
-        return false;
-    }
-    if (!/^[A-Za-z\s]+$/.test(title)) {
-        alert("Category title should contain only letters and spaces");
-        return false;
-    }
+    clearErrors();
+    let isValid=true;
 
-    // Image validation (optional but if selected)
-    if (image !== "") {
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-        if (!allowedExtensions.exec(image)) {
-            alert("Please upload JPG, JPEG, or PNG image only");
-            return false;
+    let title=document.querySelector("input[name='title']");
+    let image=document.querySelector("input[name='image']");
+    let featured=document.querySelector("input[name='featured']:checked");
+    let active=document.querySelector("input[name='active']:checked");
+
+   if(title.value.trim() === ""){
+    showError(title,"Category title required");
+    isValid = false;
+}
+else if(title.value.trim().length < 3){
+    showError(title,"Minimum 3 characters required");
+    isValid = false;
+}
+else if(!/^[A-Za-z\s]+$/.test(title.value.trim())){
+    showError(title,"Title must contain only alphabets and spaces");
+    isValid = false;
+}
+    if(image.value!==""){
+        let allowed=/(\.jpg|\.jpeg|\.png)$/i;
+        if(!allowed.exec(image.value)){
+            showError(image,"Only JPG JPEG PNG allowed");
+            isValid=false;
         }
     }
 
-    // Featured validation
-    if (featured === null) {
-        alert("Please select Featured option");
-        return false;
+    if(!featured){
+        showError(document.querySelector("input[name='featured']"),"Select featured option");
+        isValid=false;
     }
 
-    // Active validation
-    if (active === null) {
-        alert("Please select Active option");
-        return false;
+    if(!active){
+        showError(document.querySelector("input[name='active']"),"Select active option");
+        isValid=false;
     }
 
-    return true; // allow submit
+    return isValid;
 }
 
 
 //------------add food validation------------
-function validateFoodForm()
-{
-    let title = document.querySelector("input[name='title']").value.trim();
-    let description = document.querySelector("textarea[name='description']").value.trim();
-    let price = document.querySelector("input[name='price']").value;
-    let category = document.querySelector("select[name='category']").value;
-    let image = document.querySelector("input[name='image']").value;
+function validateFoodForm(){
 
-    // Title validation
-    if(title === "")
-    {
-        alert("Food title is required.");
-        return false;
+clearErrors();
+let isValid=true;
+
+let title=document.querySelector("input[name='title']");
+let description=document.querySelector("textarea[name='description']");
+let price=document.querySelector("input[name='price']");
+let category=document.querySelector("select[name='category']");
+let image=document.querySelector("input[name='image']");
+
+if(title.value.trim() === ""){
+    showError(title,"Food title is required");
+    isValid = false;
+}
+else if(title.value.trim().length < 3){
+    showError(title,"Food title must be at least 3 characters");
+    isValid = false;
+}
+else if(!/^[A-Za-z\s]+$/.test(title.value.trim())){
+    showError(title,"Food title must contain only letters and spaces");
+    isValid = false;
+}
+else if(/\s{2,}/.test(title.value.trim())){
+    showError(title,"Food title cannot have multiple consecutive spaces");
+    isValid = false;
+}
+
+if(description.value.trim() === ""){
+    showError(description,"Description is required");
+    isValid = false;
+}
+else if(description.value.trim().length < 10){
+    showError(description,"Description must be at least 10 characters");
+    isValid = false;
+}
+
+if(price.value === "" || isNaN(price.value) || price.value <= 0){
+    showError(price,"Enter valid price greater than 0");
+    isValid = false;
+}
+
+if(category.value === "0" || category.value === ""){
+    showError(category,"Please select a category");
+    isValid = false;
+}
+
+if(image.value !== ""){
+    let allowed = /(\.jpg|\.jpeg|\.png)$/i;
+    if(!allowed.exec(image.value)){
+        showError(image,"Only JPG, JPEG, or PNG images are allowed");
+        isValid = false;
     }
+}
 
-    if(title.length < 3)
-    {
-        alert("Food title must be at least 3 characters.");
-        return false;
-    }
-
-    // Description validation
-    if(description === "")
-    {
-        alert("Food description is required.");
-        return false;
-    }
-
-    // Price validation
-    if(price === "")
-    {
-        alert("Price is required.");
-        return false;
-    }
-
-    if(isNaN(price) || price <= 0)
-    {
-        alert("Please enter a valid price.");
-        return false;
-    }
-
-    // Category validation
-    if(category == 0)
-    {
-        alert("Please select a category.");
-        return false;
-    }
-
-    // Image validation (optional)
-    if(image !== "")
-    {
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-
-        if(!allowedExtensions.exec(image))
-        {
-            alert("Only JPG, JPEG, and PNG images are allowed.");
-            return false;
-        }
-    }
-
-    // Featured validation
-    let featured = document.querySelector("input[name='featured']:checked");
-    if(!featured)
-    {
-        alert("Please select Featured (Yes or No).");
-        return false;
-    }
-
-    // Active validation
-    let active = document.querySelector("input[name='active']:checked");
-    if(!active)
-    {
-        alert("Please select Active (Yes or No).");
-        return false;
-    }
-
-    return true; // form will submit
+return isValid;
 }
 
 //---------------update-admin validation-----------
-function validateUpdateAdmin()
-{
-    let fullName = document.querySelector("input[name='full_name']").value.trim();
-    let username = document.querySelector("input[name='username']").value.trim();
+function validateUpdateAdmin(){
 
-    // Full Name validation
-    if(fullName === "")
-    {
-        alert("Full Name is required.");
-        return false;
+    clearErrors();
+    let isValid = true;
+
+    let fullName = document.querySelector("input[name='full_name']");
+    let username = document.querySelector("input[name='username']");
+
+    if(fullName.value.trim() === ""){
+        showError(fullName,"Full Name is required.");
+        isValid = false;
+    }
+    else if(fullName.value.trim().length < 3){
+        showError(fullName,"Full Name must be at least 3 characters.");
+        isValid = false;
+    }
+    else if(!/^[A-Za-z\s]+$/.test(fullName.value.trim())){
+        showError(fullName,"Full Name can contain only letters and spaces.");
+        isValid = false;
     }
 
-    if(fullName.length < 3)
-    {
-        alert("Full Name must be at least 3 characters long.");
-        return false;
+    if(username.value.trim() === ""){
+        showError(username,"Username is required.");
+        isValid = false;
+    }
+    else if(username.value.trim().length < 4){
+        showError(username,"Username must be at least 4 characters.");
+        isValid = false;
+    }
+    else if(!/^[a-zA-Z0-9_]+$/.test(username.value.trim())){
+        showError(username,"Username can contain only letters, numbers and underscore.");
+        isValid = false;
     }
 
-    // Allow only letters and spaces
-    let namePattern = /^[A-Za-z\s]+$/;
-    if(!namePattern.test(fullName))
-    {
-        alert("Full Name can contain only letters and spaces.");
-        return false;
-    }
-
-    // Username validation
-    if(username === "")
-    {
-        alert("Username is required.");
-        return false;
-    }
-
-    if(username.length < 4)
-    {
-        alert("Username must be at least 4 characters long.");
-        return false;
-    }
-
-    // Username format
-    let usernamePattern = /^[a-zA-Z0-9_]+$/;
-    if(!usernamePattern.test(username))
-    {
-        alert("Username can contain only letters, numbers, and underscore.");
-        return false;
-    }
-
-    return true; // form will submit
+    return isValid;
 }
 
 //------------------update-category-------------------
-function validateCategoryUpdate()
-{
-    let title = document.querySelector("input[name='title']").value.trim();
-    let image = document.querySelector("input[name='image']").value;
+function validateCategoryUpdate(){
+
+    clearErrors();
+    let isValid = true;
+
+    let title = document.querySelector("input[name='title']");
+    let image = document.querySelector("input[name='image']");
     let featured = document.querySelector("input[name='featured']:checked");
     let active = document.querySelector("input[name='active']:checked");
 
-    // Title validation
-    if(title === "")
-    {
-        alert("Category title is required.");
-        return false;
+  if(title.value.trim() === ""){
+    showError(title,"Category title is required.");
+    isValid = false;
+}
+else if(title.value.trim().length < 3){
+    showError(title,"Title must be at least 3 characters.");
+    isValid = false;
+}
+else if(!/^[A-Za-z\s]+$/.test(title.value.trim())){
+    showError(title,"Title must contain only alphabets and spaces.");
+    isValid = false;
+}
+    else if(!/^[A-Za-z0-9\s]+$/.test(title.value.trim())){
+        showError(title,"Only letters, numbers and spaces allowed.");
+        isValid = false;
     }
 
-    if(title.length < 3)
-    {
-        alert("Category title must be at least 3 characters long.");
-        return false;
-    }
-
-    // Allow letters, numbers & spaces only
-    let titlePattern = /^[A-Za-z0-9\s]+$/;
-    if(!titlePattern.test(title))
-    {
-        alert("Title can contain only letters, numbers, and spaces.");
-        return false;
-    }
-
-    // Image validation (if user selects new image)
-    if(image !== "")
-    {
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-        if(!allowedExtensions.exec(image))
-        {
-            alert("Only JPG, JPEG, PNG, or GIF images are allowed.");
-            return false;
+    if(image.value !== ""){
+        let allowed = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if(!allowed.exec(image.value)){
+            showError(image,"Only JPG, JPEG, PNG or GIF allowed.");
+            isValid = false;
         }
     }
 
-    // Featured validation
-    if(featured === null)
-    {
-        alert("Please select Featured option.");
-        return false;
+    if(!featured){
+        showError(document.querySelector("input[name='featured']"),"Please select Featured option.");
+        isValid = false;
     }
 
-    // Active validation
-    if(active === null)
-    {
-        alert("Please select Active option.");
-        return false;
+    if(!active){
+        showError(document.querySelector("input[name='active']"),"Please select Active option.");
+        isValid = false;
     }
 
-    return true; // submit form
+    return isValid;
 }
 
 
 //-----------------update-food validation---------------
-function validateUpdateFood()
-{
-    let title = document.querySelector("input[name='title']").value.trim();
-    let description = document.querySelector("textarea[name='description']").value.trim();
-    let price = document.querySelector("input[name='price']").value;
-    let image = document.querySelector("input[name='image']").value;
-    let category = document.querySelector("select[name='category']").value;
+function validateUpdateFood(){
+
+    clearErrors();
+    let isValid = true;
+
+    let title = document.querySelector("input[name='title']");
+    let description = document.querySelector("textarea[name='description']");
+    let price = document.querySelector("input[name='price']");
+    let image = document.querySelector("input[name='image']");
+    let category = document.querySelector("select[name='category']");
     let featured = document.querySelector("input[name='featured']:checked");
     let active = document.querySelector("input[name='active']:checked");
 
-    // Title validation
-    if(title === "")
-    {
-        alert("Food title is required.");
-        return false;
+   if(title.value.trim() === ""){
+    showError(title,"Food title is required.");
+    isValid = false;
+}
+else if(title.value.trim().length < 3){
+    showError(title,"Food title must be at least 3 characters.");
+    isValid = false;
+}
+else if(!/^[A-Za-z\s]+$/.test(title.value.trim())){
+    showError(title,"Food title must contain only letters and spaces.");
+    isValid = false;
+}
+else if(/\s{2,}/.test(title.value.trim())){
+    showError(title,"Food title cannot have multiple consecutive spaces.");
+    isValid = false;
+}
+
+if(description.value.trim() === ""){
+    showError(description,"Description is required.");
+    isValid = false;
+}
+else if(description.value.trim().length < 10){
+    showError(description,"Description must be at least 10 characters.");
+    isValid = false;
+}
+
+if(price.value === "" || isNaN(price.value) || price.value <= 0){
+    showError(price,"Enter valid price greater than 0.");
+    isValid = false;
+}
+
+if(category.value === "0" || category.value === ""){
+    showError(category,"Please select a valid category.");
+    isValid = false;
+}
+
+if(image.value !== ""){
+    let allowed = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    if(!allowed.exec(image.value)){
+        showError(image,"Only JPG, JPEG, PNG or GIF allowed.");
+        isValid = false;
+    }
+}
+
+    if(!featured){
+        showError(document.querySelector("input[name='featured']"),"Please select Featured option.");
+        isValid = false;
     }
 
-    if(title.length < 3)
-    {
-        alert("Food title must be at least 3 characters.");
-        return false;
+    if(!active){
+        showError(document.querySelector("input[name='active']"),"Please select Active option.");
+        isValid = false;
     }
 
-    let titlePattern = /^[A-Za-z0-9\s]+$/;
-    if(!titlePattern.test(title))
-    {
-        alert("Title can contain only letters, numbers, and spaces.");
-        return false;
-    }
-
-    // Description validation
-    if(description === "")
-    {
-        alert("Food description is required.");
-        return false;
-    }
-
-    if(description.length < 10)
-    {
-        alert("Description must be at least 10 characters long.");
-        return false;
-    }
-
-    // Price validation
-    if(price === "")
-    {
-        alert("Price is required.");
-        return false;
-    }
-
-    if(isNaN(price) || price <= 0)
-    {
-        alert("Please enter a valid price greater than 0.");
-        return false;
-    }
-
-    // Category validation
-    if(category === "0" || category === "")
-    {
-        alert("Please select a valid category.");
-        return false;
-    }
-
-    // Image validation (only if new image selected)
-    if(image !== "")
-    {
-        let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-        if(!allowedExtensions.exec(image))
-        {
-            alert("Only JPG, JPEG, PNG, or GIF images are allowed.");
-            return false;
-        }
-    }
-
-    // Featured validation
-    if(featured === null)
-    {
-        alert("Please select Featured option.");
-        return false;
-    }
-
-    // Active validation
-    if(active === null)
-    {
-        alert("Please select Active option.");
-        return false;
-    }
-
-    return true; // allow submit
+    return isValid;
 }
 
 //------------------update-order validation------------------
-function validateOrderForm()
-{
-    let status = document.querySelector("select[name='status']").value;
+function validateOrderForm(){
 
-    // Status validation
-    if(status === "")
-    {
-        alert("Please select order status.");
-        return false;
+    clearErrors();
+    let isValid = true;
+
+    let status = document.querySelector("select[name='status']");
+
+    if(status.value === ""){
+        showError(status,"Please select order status.");
+        isValid = false;
     }
 
-
-    return true; // allow form submit
+    return isValid;
 }
 
 //--------------------update-password validation----------------
-function validatePasswordForm()
-{
-    let currentPassword = document.querySelector("input[name='current_password']").value;
-    let newPassword = document.querySelector("input[name='new_password']").value;
-    let confirmPassword = document.querySelector("input[name='confirm_password']").value;
+function validatePasswordForm(){
 
-    // Current password validation
-    if(currentPassword === "")
-    {
-        alert("Current password is required.");
-        return false;
-    }
+clearErrors();
+let isValid=true;
 
-    // New password validation
-    if(newPassword === "")
-    {
-        alert("New password is required.");
-        return false;
-    }
+let current=document.querySelector("input[name='current_password']");
+let newPass=document.querySelector("input[name='new_password']");
+let confirm=document.querySelector("input[name='confirm_password']");
 
-    if(newPassword.length < 6)
-    {
-        alert("New password must be at least 6 characters long.");
-        return false;
-    }
+if(current.value===""){
+showError(current,"Current password required");
+isValid=false;
+}
 
-    // Strong password check (optional but recommended)
-    let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
-    if(!passwordPattern.test(newPassword))
-    {
-        alert("Password must contain at least one letter and one number.");
-        return false;
-    }
+if(newPass.value===""){
+showError(newPass,"New password required");
+isValid=false;
+}
+else if(newPass.value.length<6){
+showError(newPass,"Minimum 6 characters");
+isValid=false;
+}
 
-    // Confirm password validation
-    if(confirmPassword === "")
-    {
-        alert("Please confirm your new password.");
-        return false;
-    }
+if(confirm.value===""){
+showError(confirm,"Confirm password required");
+isValid=false;
+}
+else if(newPass.value!==confirm.value){
+showError(confirm,"Passwords do not match");
+isValid=false;
+}
 
-    if(newPassword !== confirmPassword)
-    {
-        alert("New password and confirm password do not match.");
-        return false;
-    }
+if(current.value===newPass.value){
+showError(newPass,"New password must be different");
+isValid=false;
+}
 
-    // Prevent using old password again
-    if(currentPassword === newPassword)
-    {
-        alert("New password must be different from current password.");
-        return false;
-    }
-
-    return true; // allow form submission
+return isValid;
 }

@@ -75,13 +75,13 @@ if(mysqli_num_rows($res) > 0){
                     <img src='image/food/".$row['image_name']."' width='60'>
                 </td>
                 <td>".$row['item_name']."</td>
-                <td>".$row['item_price']."</td>
+                <td> Rs ".$row['item_price']."</td>
                 <td>
                     <a href='cart.php?update=".$row['id']."&qty=".($row['quantity']-1)."'>-</a>
                     ".$row['quantity']."
                     <a href='cart.php?update=".$row['id']."&qty=".($row['quantity']+1)."'>+</a>
                 </td>
-                <td>".$row['total_price']."</td>
+                <td> Rs ".$row['total_price']."</td>
                 <td>
                     <a href='cart.php?remove=".$row['id']."'>Remove</a>
                 </td>
@@ -90,7 +90,7 @@ if(mysqli_num_rows($res) > 0){
 
     echo "<tr>
             <td colspan='4'><b>Grand Total</b></td>
-            <td colspan='2'><b>".$grand_total."</b></td>
+            <td colspan='2'><b> Rs ".$grand_total."</b></td>
           </tr>";
 
     echo "</table>";

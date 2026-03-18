@@ -29,7 +29,6 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         // Success alert + redirect
         echo "<script>
-                alert('Login successful!');
                 window.location='home.php';
               </script>";
     } else {

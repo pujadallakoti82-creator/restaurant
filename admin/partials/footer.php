@@ -1,7 +1,7 @@
  <!-------Footer section starts-->
         <div class="footer" >
             <div class="wrapper">
-                <p class="text-center"> All rights reserved, Some Restaurant. Developed By - <a href="#">FoodieUs Team </a></p>
+                <p class="text-center"> Developed By - <a href="#">Pooja & Grishma </a></p>
                 
             </div>
             

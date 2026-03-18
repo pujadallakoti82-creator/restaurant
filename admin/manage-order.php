@@ -21,7 +21,7 @@
                         <th>Food</th>
                         <th>Price (Rs)</th>
                         <th>Qty</th>
-                        <th>Total</th>
+                        <th>Total (Rs)</th>
                         <th>Order Date</th>
                         <th>Status</th>
                         <th>Customer Name</th>

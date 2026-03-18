@@ -46,8 +46,14 @@ if (isset($_POST['name'], $_POST['email'], $_POST['password'])) {
             <h2>Register</h2>
             <form action="register.php" method="POST" onsubmit="return validateForm()">
                 <input type="text" name="name" id="name" placeholder="Full Name" required>
+<span id="nameError" style="color:red;"></span>
+
                 <input type="email" name="email" id="email" placeholder="Your Email" required>
+<span id="emailError" style="color:red;"></span>
+
                 <input type="password" name="password" id="password" placeholder="Enter Password" required>
+<span id="passwordError" style="color:red;"></span>
+
                 <!-- <select name="role" required>
                     <option value="customer">Customer</option>
                     <option value="admin">Admin</option>

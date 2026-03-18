@@ -20,7 +20,7 @@
    
     <section class="footer">
         <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">FoodieUs Team</a></p>
+            <p>Designed By <a href="#">Pooja & Grishma</a></p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

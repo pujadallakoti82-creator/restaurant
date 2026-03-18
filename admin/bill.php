@@ -44,9 +44,9 @@ if(isset($_GET['order_id'])){
 
         <h3>Food Details</h3>
         <p>Food Name: <?php echo $food; ?></p>
-        <p>Price: $<?php echo $price; ?></p>
+        <p>Price: Rs <?php echo $price; ?></p>
         <p>Quantity: <?php echo $quantity; ?></p>
-        <p><strong>Total Amount: $<?php echo $total; ?></strong></p>
+        <p><strong>Total Amount: Rs <?php echo $total; ?></strong></p>
 
         <hr>
 

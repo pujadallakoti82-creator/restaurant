@@ -33,9 +33,9 @@ $user_name = $user_data['name'];
                     <tr>
                         <th>Order ID</th>
                         <th>Food</th>
-                        <th>Price</th>
+                        <th>Price(Rs)</th>
                         <th>Qty</th>
-                        <th>Total</th>
+                        <th>Total(Rs)</th>
                         <th>Status</th>
                         <th>Order Date</th>
                         <th>Delivery Address</th>

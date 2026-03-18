@@ -67,12 +67,26 @@ if(isset($_POST['submit'])) {
             <!-- Contact Form -->
             <div class="contact-form">
                 <form action="" method="POST" onsubmit="return validateContactForm();">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <input type="text" name="phone" placeholder="Phone Number (Optional)">
-                    <textarea name="message" placeholder="Your Message" rows="8" required></textarea>
-                    <input type="submit" name="submit" value="Send Message" class="btn btn-primary">
-                </form>
+
+<div class="form-group">
+<input type="text" name="name" placeholder="Your Name">
+</div>
+
+<div class="form-group">
+<input type="email" name="email" placeholder="Your Email">
+</div>
+
+<div class="form-group">
+<input type="text" name="phone" placeholder="Phone Number (Optional)">
+</div>
+
+<div class="form-group">
+<textarea name="message" placeholder="Your Message" rows="8"></textarea>
+</div>
+
+<input type="submit" name="submit" value="Send Message" class="btn btn-primary">
+
+</form>
             </div>
         </div>
     </div>
@@ -94,42 +108,79 @@ if(isset($_POST['submit'])) {
 
 
 <script>
+ function showError(input, message) {
+
+    let error = document.createElement("div");
+    error.className = "error-message";
+    error.style.color = "red";
+    error.style.fontSize = "14px";
+    error.style.marginTop = "4px";
+
+    error.innerText = message;
+
+    input.insertAdjacentElement("afterend", error);
+}
+
+function clearErrors(){
+    document.querySelectorAll(".error-message").forEach(e => e.remove());
+}
 function validateContactForm() {
 
-    let name = document.querySelector("input[name='name']").value.trim();
-    let email = document.querySelector("input[name='email']").value.trim();
-    let phone = document.querySelector("input[name='phone']").value.trim();
-    let message = document.querySelector("textarea[name='message']").value.trim();
+    clearErrors();
+    let isValid = true;
+
+    let name = document.querySelector("input[name='name']");
+    let email = document.querySelector("input[name='email']");
+    let phone = document.querySelector("input[name='phone']");
+    let message = document.querySelector("textarea[name='message']");
 
     // Name validation
-    if (name.length < 3) {
-        alert("Name must be at least 3 characters long");
-        return false;
+    if (name.value.trim() === "") {
+        showError(name,"Name is required");
+        isValid = false;
+    }
+    else if (name.value.trim().length < 3) {
+        showError(name,"Name must be at least 3 characters long");
+        isValid = false;
+    }
+    else if(!/^[A-Za-z\s]+$/.test(name.value.trim())){
+        showError(name,"Name can contain only letters and spaces");
+        isValid = false;
     }
 
     // Email validation
     let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email)) {
-        alert("Please enter a valid email address");
-        return false;
+
+    if(email.value.trim() === ""){
+        showError(email,"Email is required");
+        isValid = false;
+    }
+    else if(!emailPattern.test(email.value.trim())){
+        showError(email,"Please enter a valid email address");
+        isValid = false;
     }
 
     // Phone validation (optional)
-    if (phone !== "") {
+    if (phone.value.trim() !== "") {
         let phonePattern = /^(97|98|96)\d{8}$/;
-        if (!phonePattern.test(phone)) {
-            alert("Enter a valid phone number");
-            return false;
+
+        if (!phonePattern.test(phone.value.trim())) {
+            showError(phone,"Enter a valid phone number");
+            isValid = false;
         }
     }
 
     // Message validation
-    if (message.length < 10) {
-        alert("Message must be at least 10 characters long");
-        return false;
+    if (message.value.trim() === "") {
+        showError(message,"Message is required");
+        isValid = false;
+    }
+    else if (message.value.trim().length < 10) {
+        showError(message,"Message must be at least 10 characters long");
+        isValid = false;
     }
 
-    return true; // allow form submit
+    return isValid;
 }
 </script>
 

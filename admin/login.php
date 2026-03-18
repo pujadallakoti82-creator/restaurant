@@ -43,7 +43,7 @@
         </form>
 <!-----login form ends here---->
 
-        <p class="text-center">Created by - <a href="www.foodieUsteam.com">Foodie Us</a></p>
+        <p class="text-center">Created by - <a href="">Pooja & Grishma</a></p>
     </body>
     </html>
 
