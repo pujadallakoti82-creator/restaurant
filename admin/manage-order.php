@@ -2,9 +2,12 @@
 
 <div class="main-content">
     <div class="wrapper">
-            <h1>Manage Order</h1>
-
-                <br><br><br>
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Orders</p>
+                <h1>Manage Order</h1>
+            </div>
+        </div>
 
                 <?php
                   if(isset($_SESSION['update']))
@@ -12,9 +15,16 @@
                     echo $_SESSION['update'];
                     unset ($_SESSION['update']);
                   }
+
+                  if(isset($_SESSION['delete']))
+                  {
+                    echo $_SESSION['delete'];
+                    unset($_SESSION['delete']);
+                  }
                 ?>
                 <br><br>
                  
+        <div class="panel table-panel">
                 <table class="tbl-full">
                     <tr>
                         <th>S.N.</th>
@@ -24,6 +34,8 @@
                         <th>Total (Rs)</th>
                         <th>Order Date</th>
                         <th>Status</th>
+                        <th>Payment Status</th>
+                        <th>Transaction ID</th>
                         <th>Customer Name</th>
                         <th>Contact</th>
                         <th>Email</th>
@@ -54,6 +66,8 @@
                       $total = $row['total'];
                       $order_date = $row['order_date'];
                       $status = $row['status'];
+                      $payment_status = $row['payment_status'];
+                      $transaction_id = $row['transaction_id'];
                       $customer_name = $row['customer_name'];
                       $customer_contact = $row['customer_contact'];
                       $customer_email = $row['customer_email'];
@@ -90,13 +104,33 @@
                                 }
                              ?>
                         </td>
+                        
+                        <td>
+                           <?php
+                           if($payment_status == "Paid")
+                           {
+                               echo "<label style='color: green; font-weight: bold;'>Paid</label>";
+                           }
+                           else
+                           {
+                               echo "<label style='color: red; font-weight: bold;'>Unpaid</label>";
+                           }
+                          ?>
+                          </td>
+                          <td>
+                               <?php echo htmlspecialchars($transaction_id); ?>
+                          </td>
+
 
                          <td><?php echo $customer_name; ?></td>
                          <td><?php echo $customer_contact; ?></td>
                          <td><?php echo $customer_email; ?></td>
                          <td><?php echo $customer_address; ?></td>
                          <td>
-                           <a href="<?php echo SITEURL; ?>admin/update-order.php?id=<?php echo $id; ?>" class="btn-secondary">Update Order</a>
+                           <div class="action-links">
+                             <a href="<?php echo SITEURL; ?>admin/update-order.php?id=<?php echo $id; ?>" class="btn-secondary">Update</a>
+                             <a href="<?php echo SITEURL; ?>admin/delete-order.php?id=<?php echo $id; ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this order?');">Delete</a>
+                           </div>
                          </td>
                        </tr>
 
@@ -115,6 +149,7 @@
 
                     
                 </table>
+        </div>
 
     </div>
 </div>

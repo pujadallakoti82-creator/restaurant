@@ -1,0 +1,21 @@
+/* ========== LANDING PAGE ONLY - MINIMAL CLEAN STYLE ========== */
+
+body {
+    background: #fff !important;
+}
+
+.hero {
+    background: #fff !important;
+}
+
+.hero-visual {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    transform: translateX(18px) !important;
+}
+
+.orbit-ring {
+    display: none;
+}

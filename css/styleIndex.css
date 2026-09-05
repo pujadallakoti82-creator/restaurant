@@ -7,46 +7,53 @@
 }
 
 body {
-    background-color: #ffeae0;
-    color: #000;
+    background: linear-gradient(180deg, #fffaf6 0%, #fff 100%);
+    color: #1f2937;
 }
 
 /* ---------------- HEADER / NAV ---------------- */
 .nav {
-    display: flex; /* horizontal layout */
-    justify-content: space-between; /* logo, nav links, buttons */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background-color: #fff;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    padding: 18px 50px;
+    background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+    position: sticky;
+    top: 0;
+    z-index: 50;
 }
 
 .nav .logo h1 {
-    font-weight: 700;
-    font-size: 28px;
+    font-weight: 800;
+    font-size: 30px;
+    color: #fff;
 }
 
 .nav .logo b {
-    color: #ff511c; /* accent color */
+    color: #ffb067;
 }
 
 .nav ul {
     display: flex;
-    gap: 25px;
+    gap: 20px;
     list-style: none;
+    align-items: center;
 }
 
 .nav ul li a {
     text-decoration: none;
-    color: #000;
-    font-weight: 500;
-    font-size: 16px;
+    color: rgba(255, 255, 255, 0.84);
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.25s ease;
 }
 
+.nav ul li a:hover,
 .nav ul li a.active {
-    color: #ff511c;
-    border-bottom: 2px solid #ff511c;
-    padding-bottom: 5px;
+    color: #fff;
+    border-bottom: 2px solid #ffb067;
+    padding-bottom: 7px;
 }
 
 /* ---------------- SIGN IN / SIGN UP BUTTONS ---------------- */
@@ -61,14 +68,15 @@ body {
 }
 
 .auth-buttons .signin {
-    background: transparent;
-    color: #000;
-    border: 2px solid #ff511c;
+    background: linear-gradient(135deg, #ffb067 0%, #ff7a59 100%);
+    color: #fff;
+    border: 1px solid rgba(255, 122, 89, 0.15);
+    box-shadow: 0 10px 18px rgba(255, 122, 89, 0.18);
 }
 
 .auth-buttons .signin:hover {
-    background-color: #ff511c;
-    color: #fff; /* turns red on hover */
+    background: linear-gradient(135deg, #ff9f5d 0%, #ff6b3d 100%);
+    color: #fff;
 }
 
 .auth-buttons .signup {
@@ -92,53 +100,188 @@ body {
 
 /* ---------------- HERO SECTION ---------------- */
 .hero {
-    display: flex; /* side-by-side layout */
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px 30px;
-    gap: 30px;
+    padding: 70px 70px 40px;
+    gap: 40px;
+    background: linear-gradient(135deg, #fff5ef 0%, #fff 100%);
 }
 
-/* HERO TEXT */
+.content-left {
+    flex: 1.1;
+}
+
+.promo-badge {
+    display: inline-block;
+    background: rgba(255, 113, 59, 0.12);
+    color: #c2410c;
+    border: 1px solid rgba(255, 113, 59, 0.2);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
 .content-left h2 {
-    font-size: 42px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    animation: fadeIn 1.5s ease forwards;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.08;
+    margin-bottom: 16px;
+    color: #111827;
+    animation: fadeIn 1.2s ease forwards;
 }
 
 .content-left p {
-    font-size: 18px;
-    margin-bottom: 25px;
-    animation: fadeIn 2s ease forwards;
+    max-width: 560px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 28px;
+    color: #4b5563;
+    animation: fadeIn 1.8s ease forwards;
 }
 
-/* EXPLORE BUTTON */
-.explore-btn {
-    background-color: #ff511c;
-    color: #fff;
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.explore-btn,
+.secondary-btn {
     border: none;
-    padding: 10px 25px;
-    border-radius: 5px;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-weight: 700;
     cursor: pointer;
-    animation: bounce 2s infinite; /* bouncing animation */
+    transition: all 0.25s ease;
+}
+
+.explore-btn {
+    background: linear-gradient(135deg, #ff7a59, #ff511c);
+    color: #fff;
+    box-shadow: 0 18px 30px rgba(255, 81, 28, 0.22);
+    animation: bounce 2s infinite;
 }
 
 .explore-btn:hover {
-    background: linear-gradient(45deg, #ff511c, #ff7533);
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 22px 35px rgba(255, 81, 28, 0.28);
 }
 
-/* HERO IMAGE */
+.secondary-btn {
+    background: transparent;
+    border: 1px solid rgba(17, 24, 39, 0.12);
+    color: #111827;
+}
+
+.secondary-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+}
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.hero-stats div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 120px;
+}
+
+.hero-stats strong {
+    font-size: 1.3rem;
+    color: #111827;
+}
+
+.hero-stats span {
+    color: #6b7280;
+    font-size: 0.82rem;
+}
+
+.content-right {
+    flex: 0.9;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #fff0e7 0%, #fff 55%);
+    border-radius: 32px;
+    min-height: 420px;
+    width: min(100%, 430px);
+    border: 1px solid rgba(255, 113, 59, 0.1);
+    box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+}
+
+.orbit-ring {
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border: 2px dashed rgba(255, 113, 59, 0.35);
+    border-radius: 50%;
+    animation: spin 18s linear infinite;
+}
+
 .hero-img {
-    width: 300px; /* medium size */
+    position: relative;
+    z-index: 1;
+    width: 330px;
     max-width: 100%;
     height: auto;
-    animation: rotate 15s linear infinite; /* circular rotation */
+    animation: rotate 18s linear infinite;
+}
+
+.floating-card {
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 20px 35px rgba(15, 23, 42, 0.1);
+}
+
+.floating-card span {
+    color: #ef4444;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.floating-card strong {
+    color: #111827;
+    font-size: 1rem;
+}
+
+.floating-card small {
+    color: #6b7280;
 }
 
 /* ROTATE KEYFRAMES */
 @keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
@@ -157,15 +300,17 @@ body {
 
 /* ---------------- POPULAR DISHES ---------------- */
 .category {
-    padding: 50px;
+    padding: 30px 50px 60px;
     text-align: center;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 #popular_dish_text{
     text-align: center;
-        font-size: 28px;
-    margin-bottom: 30px;
+    font-size: clamp(1.8rem, 2vw, 2.5rem);
+    margin: 30px 0 16px;
+    color: #111827;
 }
 
 
@@ -179,40 +324,41 @@ body {
 
 /* CARD STYLE */
 .card {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.96);
+    border-radius: 20px;
+    padding: 22px 18px;
+    box-shadow: 0 18px 35px rgba(15, 23, 42, 0.08);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(148, 163, 184, 0.14);
 }
 
 .card img {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 15px;
     transition: transform 0.5s ease;
+    box-shadow: 0 16px 28px rgba(255, 113, 59, 0.14);
 }
 
 /* CARD HOVER */
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 22px 40px rgba(15, 23, 42, 0.14);
 }
 
 .card img:hover {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.08) rotate(4deg);
 }
 
 /* CARD TEXT */
 .card h4 {
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1.1rem;
     margin-bottom: 10px;
-    color: #000;
-    
+    color: #111827;
 }
 
 

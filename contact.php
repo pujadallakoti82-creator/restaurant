@@ -64,46 +64,39 @@ if(isset($_POST['submit'])) {
         ?>
 
         <div class="contact-content">
-            <!-- Contact Form -->
             <div class="contact-form">
                 <form action="" method="POST" onsubmit="return validateContactForm();">
+                    <div class="form-group">
+                        <input type="text" name="name" placeholder="Your Name">
+                    </div>
 
-<div class="form-group">
-<input type="text" name="name" placeholder="Your Name">
-</div>
+                    <div class="form-group">
+                        <input type="email" name="email" placeholder="Your Email">
+                    </div>
 
-<div class="form-group">
-<input type="email" name="email" placeholder="Your Email">
-</div>
+                    <div class="form-group">
+                        <input type="text" name="phone" placeholder="Phone Number (Optional)">
+                    </div>
 
-<div class="form-group">
-<input type="text" name="phone" placeholder="Phone Number (Optional)">
-</div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" rows="8"></textarea>
+                    </div>
 
-<div class="form-group">
-<textarea name="message" placeholder="Your Message" rows="8"></textarea>
-</div>
+                    <input type="submit" name="submit" value="Send Message" class="btn btn-primary">
+                </form>
+            </div>
 
-<input type="submit" name="submit" value="Send Message" class="btn btn-primary">
-
-</form>
+            <div class="contact-info">
+                <h3>Our Information</h3>
+                <p><strong>Phone:</strong> +977 9843000000</p>
+                <p><strong>Email:</strong> info@foodieus.com</p>
+                <p><strong>Address:</strong> Chitwan, Nepal</p>
+                <div class="info-badge">We reply within 24 hours</div>
             </div>
         </div>
     </div>
 </section>
 <!-- Contact Section Ends Here -->
-
-
-
-        <div class="contact-content">
-            <!-- Contact Info -->
-            <div class="contact-info">
-                <h3>Our Info</h3>
-                <p><strong>Phone:</strong> +977 9843000000</p>
-                <p><strong>Email:</strong> info@foodieus.com</p>
-                <p><strong>Address:</strong> Chitwan, Nepal</p>
-            </div>
-    </div>
 
 
 
@@ -184,6 +177,6 @@ function validateContactForm() {
 }
 </script>
 
-
+<script src="main.js"></script>
 
 <?php include('partials-front/footer.php'); ?> 

@@ -18,9 +18,9 @@
    <!--- social Section Ends Here -->
 
    
-    <section class="footer">
+    <section class="footer" style="background: linear-gradient(135deg, #111827 0%, #1f2937 100%); color: #fff; padding: 18px 0;">
         <div class="container text-center">
-            <p>Designed By <a href="#">Pooja & Grishma</a></p>
+            <p style="margin: 0; color: #fff;">Designed by Pooja and Grishma</p>
         </div>
     </section>
     <!-- footer Section Ends Here -->

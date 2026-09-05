@@ -2,15 +2,13 @@
 
 <div class="main-content">
     <div class="wrapper">
-            <h1>Manage Food</h1>
-
-
-            <br><br>
-
-                <!-----Button to add admin----->
-                <a href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary">Add Food</a>
-
-                <br><br><br>
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Menu Management</p>
+                <h1>Manage Food</h1>
+            </div>
+            <a href="<?php echo SITEURL; ?>admin/add-food.php" class="btn-primary">Add Food</a>
+        </div>
 
          <?php
 
@@ -47,6 +45,7 @@
          ?>
 
                  
+<div class="panel">
                 <table class="tbl-full">
                     <tr>
                         <th>S.N.</th>
@@ -125,6 +124,7 @@
 
 
                 </table>
+        </div>
 
     </div>
 </div>

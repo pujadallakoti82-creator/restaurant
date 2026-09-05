@@ -57,9 +57,9 @@ if (isset($_POST['email'], $_POST['password'])) {
 
         <div class="form-container">
             <h2>Login</h2>
-            <form action="login.php" method="post">
-                <input type="email" name="email" id="email" placeholder="Email" required>
-                <input type="password" name="password" id="password" placeholder="Password" required>
+            <form action="login.php" method="post" onsubmit="return validateUserLogin()">
+                <input type="email" name="email" id="email" placeholder="Email">
+                <input type="password" name="password" id="password" placeholder="Password">
                 <button type="submit">Login</button>
             </form>
             <div class="link">Don't have an account? <a href="register.php">Register here</a></div>

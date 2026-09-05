@@ -119,7 +119,7 @@
                     <td colspan="2">
                         <input type="hidden" name="id" value=" <?php echo $id; ?>">
                         <input type="hidden" name="price" value=" <?php echo $price; ?>">
-                        <input type="submit" name="submit" value="Update Admin" class="btn-secondary">
+                        <input type="submit" name="submit" value="Update Order" class="btn-secondary">
                     </td>
                 </tr>
 
@@ -148,6 +148,7 @@ if(isset($_POST['submit']))
         quantity = $quantity,
         total = $total,
         status = '$status',
+        payment_status = CASE WHEN '$status' = 'Delivered' THEN 'Paid' ELSE payment_status END,
         customer_name = '$customer_name',
         customer_contact = '$customer_contact',
         customer_email = '$customer_email',

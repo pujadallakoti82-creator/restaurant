@@ -20,13 +20,14 @@ if(isset($_GET['food_id'])){
         $food_image = $row['image_name'];
         $quantity = 1;
         $total_price = $food_price * $quantity;
+        $max_quantity = defined('MAX_ORDER_QUANTITY') ? MAX_ORDER_QUANTITY : 10;
 
         $sql_check = "SELECT * FROM cart WHERE user_id=$user_id AND item_id=$food_id";
         $res_check = mysqli_query($conn, $sql_check);
 
         if(mysqli_num_rows($res_check) > 0){
             $row_cart = mysqli_fetch_assoc($res_check);
-            $new_qty = $row_cart['quantity'] + 1;
+            $new_qty = min($row_cart['quantity'] + 1, $max_quantity);
             $new_total = $new_qty * $food_price;
             mysqli_query($conn, "UPDATE cart SET quantity=$new_qty, total_price=$new_total WHERE user_id=$user_id AND item_id=$food_id");
         } else {

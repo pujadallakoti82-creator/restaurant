@@ -1,5 +1,24 @@
 <?php include('config/constants.php') ?>
 
+<?php
+// Get current page name
+$current_page = basename($_SERVER['PHP_SELF']);
+
+// Optional: get user_id from session if using login system
+$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
+// Count items in cart
+$cart_count = 0;
+if($user_id > 0) {
+    $sql = "SELECT SUM(quantity) AS count FROM cart WHERE user_id='$user_id'";
+    $res = mysqli_query($conn, $sql);
+    if($res) {
+        $row = mysqli_fetch_assoc($res);
+        $cart_count = $row['count'] ? $row['count'] : 0;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,37 +47,12 @@
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
            <li><a href="<?php echo SITEURL; ?>view-order-history.php">Order History</a></li>
            <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
-           <li><a href="#">&nbsp;</a></li>
+           <li>
+                <a href="<?php echo SITEURL; ?>cart.php" class="header-cart-link" aria-label="Cart">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="header-cart-count"><?php echo $cart_count; ?></span>
+                </a>
+           </li>
         </ul>
     </nav>
     </header>
-
-    
-
-    <?php
-// Get current page name
-$current_page = basename($_SERVER['PHP_SELF']);
-
-// Optional: get user_id from session if using login system
-$user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-
-// Count items in cart
-$cart_count = 0;
-if($user_id > 0) {
-    $sql = "SELECT SUM(quantity) AS count FROM cart WHERE user_id='$user_id'";
-    $res = mysqli_query($conn, $sql);
-    if($res) {
-        $row = mysqli_fetch_assoc($res);
-        $cart_count = $row['count'] ? $row['count'] : 0;
-    }
-}
-?>
-
- <?php if($current_page == 'foods.php' || $current_page == 'category-foods.php' || $current_page == 'categories.php'): ?> 
-    <div class="cart-container">
-        <a href="<?php echo SITEURL; ?>cart.php" class="cart-icon">
-            <i class="fa fa-shopping-cart"></i>
-            <span class="cart-count"><?php echo $cart_count; ?></span>
-        </a>
-    </div>
-<?php endif; ?>

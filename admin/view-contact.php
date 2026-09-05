@@ -2,8 +2,12 @@
 
 <div class="main-content">
     <div class="wrapper">
-        <h1>Contact Messages</h1>
-        <br>
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Support</p>
+                <h1>Contact Messages</h1>
+            </div>
+        </div>
 
         <?php
         if(isset($_SESSION['delete'])){
@@ -12,6 +16,7 @@
         }
         ?>
 
+        <div class="panel">
         <table class="tbl-full">
             <tr>
                 <th>S.N.</th>
@@ -57,6 +62,7 @@
             }
             ?>
         </table>
+        </div>
     </div>
 </div>
 

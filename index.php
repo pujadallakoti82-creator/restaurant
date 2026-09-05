@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/StyleIndex.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="css/index-landing.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <title>FoodieUs</title>
@@ -44,7 +45,10 @@
         <a href="menu.php" ></a>
     </div>
     <div class="content-right">
-        <img src="image/image1.png" alt="Delicious Food" class="hero-img">
+        <div class="hero-visual">
+            <div class="orbit-ring"></div>
+            <img src="image/image1.png" alt="Delicious Food" class="hero-img">
+        </div>
     </div>
 </section>
 

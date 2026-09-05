@@ -2,10 +2,13 @@
 
 <div class="main-content">
     <div class="wrapper">
-            <h1>Manage Category</h1>
-
-
-            <br><br>
+        <div class="page-header">
+            <div>
+                <p class="eyebrow">Catalog</p>
+                <h1>Manage Category</h1>
+            </div>
+            <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn-primary">Add Category</a>
+        </div>
 
             <?php
 
@@ -53,13 +56,7 @@
 
 
         ?>
-        <br><br>
-
-                <!-----Button to add admin----->
-                <a href="<?php echo SITEURL; ?>admin/add-category.php" class="btn-primary">Add Category</a>
-
-                <br><br><br>
-                 
+        <div class="panel">
                 <table class="tbl-full">
                     <tr>
                         <th>S.N.</th>
@@ -151,6 +148,7 @@
                     ?>
 
                 </table>
+        </div>
 
     </div>
 </div>

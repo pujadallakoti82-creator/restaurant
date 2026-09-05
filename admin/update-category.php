@@ -227,5 +227,5 @@
     </div>
 </div>
 
-
+<script src="../main.js"></script>
 <?php include('partials/footer.php');  ?>

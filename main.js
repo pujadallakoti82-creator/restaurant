@@ -17,28 +17,29 @@ function index_redirect(){
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Get quantity input
     const quantityInput = document.querySelector(".quantity");
-
-    // Get price and total elements
     const priceInput = document.querySelector(".price");
     const totalSpan = document.querySelector(".total-price");
+    const maxQty = 10;
 
-    // Initial total when page loads
+    if (!quantityInput || !priceInput || !totalSpan) {
+        return;
+    }
+
     let price = parseFloat(priceInput.value);
     let qty = parseInt(quantityInput.value);
     totalSpan.innerText = (price * qty).toFixed(2);
 
-    // Update total when quantity changes
     quantityInput.addEventListener("input", function () {
-
         let qty = parseInt(this.value);
 
-        // Prevent zero or negative values
-        if (qty < 1 || isNaN(qty)) {
+        if (isNaN(qty) || qty < 1) {
             qty = 1;
-            this.value = 1;
+        } else if (qty > maxQty) {
+            qty = maxQty;
         }
+
+        this.value = qty;
 
         let total = price * qty;
         totalSpan.innerText = total.toFixed(2);
@@ -133,14 +134,21 @@ function validateOrderForm(){
     let email = document.querySelector("input[name='email']");
     let address = document.querySelector("textarea[name='address']");
 
-    if(quantity.value === "" || quantity.value <= 0){
-        showError(quantity,"Please enter a valid quantity (minimum 1).");
-        isValid = false;
-    }
+    if (quantity && price) {
+        if (quantity.value === "" || Number(quantity.value) <= 0) {
+            showError(quantity, "Please enter a valid quantity (minimum 1).");
+            isValid = false;
+        }
 
-    if(price.value === "" || price.value <= 0){
-        showError(quantity,"Invalid price.");
-        isValid = false;
+        if (Number(quantity.value) > 10) {
+            showError(quantity, "Maximum quantity is 10 per order.");
+            isValid = false;
+        }
+
+        if (price.value === "" || Number(price.value) <= 0) {
+            showError(quantity, "Invalid price.");
+            isValid = false;
+        }
     }
 
     let namePattern=/^[A-Za-z ]{3,}$/;
@@ -293,6 +301,8 @@ let description=document.querySelector("textarea[name='description']");
 let price=document.querySelector("input[name='price']");
 let category=document.querySelector("select[name='category']");
 let image=document.querySelector("input[name='image']");
+let featured=document.querySelector("input[name='featured']:checked");
+let active=document.querySelector("input[name='active']:checked");
 
 if(title.value.trim() === ""){
     showError(title,"Food title is required");
@@ -320,7 +330,7 @@ else if(description.value.trim().length < 10){
     isValid = false;
 }
 
-if(price.value === "" || isNaN(price.value) || price.value <= 0){
+if(price.value.trim() === "" || isNaN(price.value) || Number(price.value) <= 0){
     showError(price,"Enter valid price greater than 0");
     isValid = false;
 }
@@ -330,12 +340,26 @@ if(category.value === "0" || category.value === ""){
     isValid = false;
 }
 
-if(image.value !== ""){
+if(image.value === ""){
+    showError(image,"Food image is required");
+    isValid = false;
+}
+else {
     let allowed = /(\.jpg|\.jpeg|\.png)$/i;
     if(!allowed.exec(image.value)){
         showError(image,"Only JPG, JPEG, or PNG images are allowed");
         isValid = false;
     }
+}
+
+if(!featured){
+    showError(document.querySelector("input[name='featured']"),"Please select featured option");
+    isValid = false;
+}
+
+if(!active){
+    showError(document.querySelector("input[name='active']"),"Please select active option");
+    isValid = false;
 }
 
 return isValid;
@@ -398,14 +422,10 @@ else if(title.value.trim().length < 3){
     showError(title,"Title must be at least 3 characters.");
     isValid = false;
 }
-else if(!/^[A-Za-z\s]+$/.test(title.value.trim())){
-    showError(title,"Title must contain only alphabets and spaces.");
+else if(!/^[A-Za-z0-9\s]+$/.test(title.value.trim())){
+    showError(title,"Title must contain only letters, numbers and spaces.");
     isValid = false;
 }
-    else if(!/^[A-Za-z0-9\s]+$/.test(title.value.trim())){
-        showError(title,"Only letters, numbers and spaces allowed.");
-        isValid = false;
-    }
 
     if(image.value !== ""){
         let allowed = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
@@ -469,7 +489,7 @@ else if(description.value.trim().length < 10){
     isValid = false;
 }
 
-if(price.value === "" || isNaN(price.value) || price.value <= 0){
+if(price.value.trim() === "" || isNaN(price.value) || Number(price.value) <= 0){
     showError(price,"Enter valid price greater than 0.");
     isValid = false;
 }
@@ -555,4 +575,115 @@ isValid=false;
 }
 
 return isValid;
+}
+
+//--------------------admin-login validation-------------------
+function validateAdminLogin(){
+    clearErrors();
+    let isValid = true;
+
+    let username = document.querySelector("input[name='username']");
+    let password = document.querySelector("input[name='password']");
+
+    if(username.value.trim() === ""){
+        showError(username,"Username is required.");
+        isValid = false;
+    }
+    else if(username.value.trim().length < 4){
+        showError(username,"Username must be at least 4 characters.");
+        isValid = false;
+    }
+
+    if(password.value === ""){
+        showError(password,"Password is required.");
+        isValid = false;
+    }
+    else if(password.value.length < 6){
+        showError(password,"Password must be at least 6 characters.");
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+//--------------------user-login validation-------------------
+function validateUserLogin(){
+    clearErrors();
+    let isValid = true;
+
+    let email = document.querySelector("input[name='email']");
+    let password = document.querySelector("input[name='password']");
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(email.value.trim() === ""){
+        showError(email,"Email is required.");
+        isValid = false;
+    }
+    else if(!emailPattern.test(email.value.trim())){
+        showError(email,"Enter a valid email address.");
+        isValid = false;
+    }
+
+    if(password.value === ""){
+        showError(password,"Password is required.");
+        isValid = false;
+    }
+    else if(password.value.length < 6){
+        showError(password,"Password must be at least 6 characters.");
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+//--------------------contact form validation-------------------
+function validateContactForm(){
+    clearErrors();
+    let isValid = true;
+
+    let name = document.querySelector("input[name='name']");
+    let email = document.querySelector("input[name='email']");
+    let phone = document.querySelector("input[name='phone']");
+    let message = document.querySelector("textarea[name='message']");
+
+    let namePattern = /^[A-Za-z ]{3,}$/;
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let phonePattern = /^(97|98|96)\d{8}$|^\d{10}$/;
+
+    if(name.value.trim() === ""){
+        showError(name,"Full name is required.");
+        isValid = false;
+    }
+    else if(!namePattern.test(name.value.trim())){
+        showError(name,"Name must contain only letters and spaces (min 3 characters).");
+        isValid = false;
+    }
+
+    if(email.value.trim() === ""){
+        showError(email,"Email is required.");
+        isValid = false;
+    }
+    else if(!emailPattern.test(email.value.trim())){
+        showError(email,"Enter a valid email address.");
+        isValid = false;
+    }
+
+    if(phone.value.trim() !== ""){
+        if(!phonePattern.test(phone.value.trim())){
+            showError(phone,"Enter a valid phone number (10 digits or Nepal format).");
+            isValid = false;
+        }
+    }
+
+    if(message.value.trim() === ""){
+        showError(message,"Message is required.");
+        isValid = false;
+    }
+    else if(message.value.trim().length < 10){
+        showError(message,"Message must be at least 10 characters.");
+        isValid = false;
+    }
+
+    return isValid;
 }

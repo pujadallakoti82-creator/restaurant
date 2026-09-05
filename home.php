@@ -33,6 +33,12 @@ if(!isset($_SESSION['user_id'])){
           <li> <a href="<?php echo SITEURL; ?>foods.php">Menu</a> </li>
            <li><a href="<?php echo SITEURL; ?>contact.php">Contact</a></li>
            <li><a href="<?php echo SITEURL; ?>logout.php">Logout</a></li>
+           <li>
+               <a href="<?php echo SITEURL; ?>cart.php" class="header-cart-link" aria-label="Cart">
+                   <i class="fa fa-shopping-cart"></i>
+                   <span class="header-cart-count"><?php echo isset($_SESSION['user_id']) ? (int) mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(quantity) AS count FROM cart WHERE user_id='" . $_SESSION['user_id'] . "'"))['count'] : 0; ?></span>
+               </a>
+           </li>
         </ul>
     </nav>
 
@@ -41,13 +47,25 @@ if(!isset($_SESSION['user_id'])){
 <!-- HERO SECTION -->
 <section class="hero">
     <div class="content-left">
-        <h2>Order Your Best <br> Food Anytime</h2>
-        <p>Hey, our delicious food is waiting for you. We deliver fresh items right to your doorstep.</p>
-        <button class="explore-btn" onclick="window.location.href='foods.php'">Explore Food</button>
-        <a href="menu.php" ></a>
+        <span class="promo-badge">Fresh • Fast • Flavorful</span>
+        <h2>Craving something delicious?</h2>
+        <p>Discover chef-made meals, quick delivery, and comforting favorites delivered right to your door.</p>
+
+        <div class="hero-actions">
+            <button class="explore-btn" onclick="window.location.href='foods.php'">Order Now</button>
+            <button class="secondary-btn" onclick="window.location.href='categories.php'">Browse Menu</button>
+        </div>
+
+        <div class="hero-stats">
+            <div><strong>2k+</strong><span>Happy customers</span></div>
+            <div><strong>15 min</strong><span>Average delivery</span></div>
+            <div><strong>4.8/5</strong><span>Food rating</span></div>
+        </div>
     </div>
     <div class="content-right">
-        <img src="image/image1.png" alt="Delicious Food" class="hero-img">
+        <div class="hero-visual">
+            <img src="image/image1.png" alt="Delicious Food" class="hero-img">
+        </div>
     </div>
 </section>
 

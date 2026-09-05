@@ -186,8 +186,7 @@ if(isset($_POST['submit']))
 </div>
 
 
-
-
+<script src="../main.js"></script>
 <?php include('partials/footer.php'); ?>
 
 

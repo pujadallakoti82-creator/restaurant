@@ -1,18 +1,34 @@
 <?php
 
-//start session
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+if (!defined('SITEURL')) {
+    define('SITEURL', 'http://localhost/restaurant-practice/');
+}
 
-//create constants to store non repeating value
-define('SITEURL','http://localhost/project/restaurant/');
+if (!defined('LOCALHOST')) {
+    define('LOCALHOST', 'localhost');
+}
 
-define('LOCALHOST', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD','');
-define('DB_NAME', 'food_db');
+if (!defined('DB_USERNAME')) {
+    define('DB_USERNAME', 'root');
+}
 
-$conn = mysqli_connect(LOCALHOST,DB_USERNAME,DB_PASSWORD) or die(mysqli_error()); //database connection
- $db_select = mysqli_select_db($conn,DB_NAME) or die(mysqli_error());  //selecting databse
+if (!defined('DB_PASSWORD')) {
+    define('DB_PASSWORD', '');
+}
 
-  ?>
+if (!defined('DB_NAME')) {
+    define('DB_NAME', 'food_db');
+}
+
+if (!defined('MAX_ORDER_QUANTITY')) {
+    define('MAX_ORDER_QUANTITY', 10);
+}
+
+if (!isset($conn)) {
+    $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die(mysqli_error());
+    $db_select = mysqli_select_db($conn, DB_NAME) or die(mysqli_error());
+}

@@ -1,51 +1,67 @@
-<?php include('../config/constants.php'); ?>
+<?php
+include('../config/constants.php');
 
+if(isset($_SESSION['user']))
+{
+    header('location:'.SITEURL.'admin/index.php');
+    exit();
+}
+?>
 
 <html>
     <head>
-        <title>Login - Food Order System</title>
+        <title>Admin Login - Food Order System</title>
         <link rel="stylesheet" href="../css/admin.css">
     </head>
-    <body>
-        
-    <div class="login">
-        <h1 class="text-center">Login</h1> 
-        <br><br>
+    <body class="admin-auth-body">
+        <div class="auth-shell">
+            <div class="auth-card">
+                <div class="auth-brand">
+                    <span class="brand-mark">R</span>
+                    <div>
+                        <strong>Restaurant Admin</strong>
+                        <small>Secure Login</small>
+                    </div>
+                </div>
 
-        <?php
-        if(isset($_SESSION['login']))
-        {
-            echo $_SESSION['login'];
-            unset ($_SESSION['login']);
-        }
-        ?>
+                <h1>Welcome back</h1>
+                <p class="auth-subtitle">Sign in to manage your restaurant dashboard.</p>
 
-         <?php
-        if(isset($_SESSION['no-login-message']))
-        {
-            echo $_SESSION['no-login-message'];
-            unset ($_SESSION['no-login-message']);
-        }
-        ?>
-        
-        <br><br>
+                <?php
+                if(isset($_SESSION['login']))
+                {
+                    echo $_SESSION['login'];
+                    unset ($_SESSION['login']);
+                }
+                ?>
 
-        <!---login form starts here---->
-        <form action="" method="POST" class="text-center">
-            Username: <br>
-            <input type="text" name="username" placeholder="Enter Username"><br><br>
+                 <?php
+                if(isset($_SESSION['no-login-message']))
+                {
+                    echo $_SESSION['no-login-message'];
+                    unset ($_SESSION['no-login-message']);
+                }
+                ?>
 
-            Password:  <br>
-            <input type="password" name="password" placeholder="Enter Password"><br><br>
+                <form action="" method="POST" onsubmit="return validateAdminLogin()">
+                    <div class="field-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter Username">
+                    </div>
 
-            <input type="submit" name="submit" value="Login" class="btn-primary">
-            <br><br>
-        </form>
-<!-----login form ends here---->
+                    <div class="field-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Enter Password">
+                    </div>
 
-        <p class="text-center">Created by - <a href="">Pooja & Grishma</a></p>
+                    <button type="submit" name="submit" class="btn-primary auth-btn">Login</button>
+                </form>
+
+                <p class="text-center auth-footer">Powered by <a href="">Pooja & Grishma</a></p>
+            </div>
+        </div>
     </body>
-    </html>
+</html>
 
 
     <?php
@@ -77,15 +93,18 @@ if(isset($_POST['submit']))
 
         //redirect to home page dashboard
         header('location:'.SITEURL.'admin/index.php');
+        exit();
     }
     else{
         //user not available and login fail
         $_SESSION['login'] = "<div class='error text-center'>Username or Password did not match.</div>";
         //redirect to home page dashboard
         header('location:'.SITEURL.'admin/login.php');
+        exit();
     }
 
 }
 
     ?>
 
+    <script src="../main.js"></script>
